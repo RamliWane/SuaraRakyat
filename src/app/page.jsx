@@ -79,9 +79,8 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
             type="button"
-            className=" bg-[#DC9B9B] text-white p-3 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
-            >
-            GetStarted   
+            className="bg-[#DC9B9B] text-white p-3 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-transform duration-300 ease-out hover:-translate-y-2"            >
+            GetStarted
           </button>
             <button
             type="button"
