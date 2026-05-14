@@ -1,8 +1,9 @@
 "use client"
-import { libraryNav, menuNav } from "@/lib/navigationItems";
+import { libraryNav, menuNav } from "../../../lib/navigationitems";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react";
+
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Sidebar() {
 
             <div className="h-full bg-white shadow-xl text-gray-500 p-10 min-w-50">
                 <div className="m-4 space-y-6">
-                    <h3 className="text-[12px] font-bold -ml-5">LIBRARY</h3>
+                    <h3 className="text-[12px] font-bold -ml-5">Navigation</h3>
                     <ul className="space-x-2">
                         {libraryNav.map((item) => (
                             <Link href={item.href} key={item.label}>
