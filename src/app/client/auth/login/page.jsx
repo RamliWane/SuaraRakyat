@@ -159,7 +159,7 @@ export default function Login() {
                         </div>
                 </div>
             </div>
-            <div className="hidden md:block lg:block md:pt-60 lg:pt-1 w-[450px]">
+            <div className="hidden md:block lg:block md:pt-60 lg:pt-1 w-110">
                 <img className='rounded-xl w-full h-auto' src="/assets/jokowidoa.jpeg" alt="" />
             </div>
         </div>
