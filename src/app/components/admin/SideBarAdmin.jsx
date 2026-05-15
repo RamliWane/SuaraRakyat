@@ -1,9 +1,8 @@
 "use client"
-import { libraryNav, menuNav } from "../../../lib/navigationitems";
+import {AdminNavigation, AdminNavigationMenu } from "../../../lib/navigationitems";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react";
-
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +14,12 @@ export default function Sidebar() {
             lg:translate-x-0 lg:w-50`}>
 
             <div className="h-full bg-white shadow-xl text-gray-500 p-10 min-w-50">
-                <div className="m-4 space-y-6">
-                    <h3 className="text-[12px] font-bold -ml-5">NAVIGATION</h3>
+                <div className="m-2 space-y-6">
+                    <h3 className="text-[12px] font-bold -ml-5">LIBRARY</h3>
                     <ul className="space-x-2">
-                        {libraryNav.map((item) => (
+                        {AdminNavigation.map((item) => (
                             <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-8 cursor-pointer ${pathname === item.href ? "text-blue-600" : "hover:text-blue-600 text-gray-500"}`}>    
+                                <li className={`flex items-center justify-between gap-5 cursor-pointer ${pathname === item.href ? "text-blue-600" : "hover:text-blue-600 text-gray-500"}`}>    
                                     <div className="flex gap-2">    
                                         {item.icon}
                                         {item.label}
@@ -34,7 +33,7 @@ export default function Sidebar() {
                     </ul>
                     <h3 className="text-[12px] font-bold -ml-5">MENU</h3>
                     <ul className="space-x-2">
-                        {menuNav.map((item) => (
+                        {AdminNavigationMenu.map((item) => (
                             <Link href={item.href} key={item.label}>
                                 <li className={`flex items-center gap-1 cursor-pointer ${pathname === item.href ? "text-blue-600" : "hover:text-blue-600 text-gray-500"}`}>
                                     {item.icon}

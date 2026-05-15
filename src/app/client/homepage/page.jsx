@@ -1,4 +1,3 @@
-'use client'
 
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
@@ -38,14 +37,6 @@ export default async function home() {
                                 </div>
                             </section>
                         </div>
-
-                        <div className="flex flex-col gap-3">
-                            <section>
-                                <h1 className="text-[17px] font-bold">MOST POPULAR</h1>
-                                <h1 className="text-[13px] font-mono">Ada Agenda Apa Saja Sekarang?</h1>
-                            </section>
-                        </div>
-
                     </main>
                 </div>
             </div>
