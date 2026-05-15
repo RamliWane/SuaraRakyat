@@ -19,13 +19,13 @@ export default function Sidebar() {
                     <ul className="space-x-2">
                         {AdminNavigation.map((item) => (
                             <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center justify-between gap-5 cursor-pointer ${pathname === item.href ? "text-blue-600" : "hover:text-blue-600 text-gray-500"}`}>    
+                                <li className={`flex items-center justify-between gap-5 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-gray-500"}`}>    
                                     <div className="flex gap-2">    
                                         {item.icon}
                                         {item.label}
                                     </div>
                                     {pathname === item.href && (
-                                        <div className="w-1.5 h-6 pl-1 bg-blue-500 rounded-full"/>
+                                        <div className="w-1.5 h-6 pl-1 bg-[#DC9B9B] rounded-full"/>
                                     )}
                                 </li>
                             </Link>
@@ -35,7 +35,7 @@ export default function Sidebar() {
                     <ul className="space-x-2">
                         {AdminNavigationMenu.map((item) => (
                             <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-1 cursor-pointer ${pathname === item.href ? "text-blue-600" : "hover:text-blue-600 text-gray-500"}`}>
+                                <li className={`flex items-center gap-1 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-gray-500"}`}>
                                     {item.icon}
                                     {item.label}
                                 </li>

@@ -3,7 +3,7 @@ export default function NavbarHome() {
     return (
         <div className="w-full h-16 bg-white flex items-center justify-between px-6 py-2 border-b border-gray-300 ">
             <div className="flex items-center gap-8">
-                <h1 className="font-bold text-[20px] text-blue-600">SuaraRakyat</h1>
+                <h1 className="font-bold text-[20px] text-[#DC9B9B]">SuaraRakyat</h1>
             </div>
 
             <div className="flex text-[13px] font-bold gap-2">
