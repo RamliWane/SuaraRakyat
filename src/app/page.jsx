@@ -98,8 +98,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-<section className="flex justify-center flex-col py-20 px-6 md:px-12">
-          <div className="flex flex-col">
+      <section className="flex justify-center flex-col py-20 px-6 md:px-12">
+        <div className="flex flex-col">
           <div>
             <CategoryFeatures />
           </div>

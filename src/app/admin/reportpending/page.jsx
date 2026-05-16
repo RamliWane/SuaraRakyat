@@ -1,6 +1,6 @@
 import SidebarAdmin from '../../components/admin/SideBarAdmin';
 import NavbarHome from '../../components/client/NavbarHome';
-import SubmissionPending from "../../components/admin/SubmissionPending";
+import ReportPending from "../../components/admin/ReportPending";
 
 export default async function KatalogClone() {
 
@@ -17,7 +17,7 @@ export default async function KatalogClone() {
                         </p>
                     </div>
                     <hr className="border-t border-black" />
-                    <SubmissionPending />
+                    <ReportPending />
                 </div>
             </div>
         </div>
