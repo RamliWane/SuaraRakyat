@@ -39,7 +39,7 @@ export default async function DashboardAdmin() {
         <main className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar p-4 sm:p-6 space-y-6 bg-gray-50">
 
           <section>
-            <h1 className="text-xl font-medium">Selamat datang, Admin</h1>
+            <h1 className="text-xl font-medium">Selamat datang, Admin 👋</h1>
             <p className="text-sm text-gray-500">Jumat, 15 Mei 2026 — Berikut ringkasan laporan hari ini</p>
           </section>
 

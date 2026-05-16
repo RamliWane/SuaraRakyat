@@ -7,7 +7,7 @@ export default function NavbarHome() {
             </div>
 
             <div className="flex text-[13px] font-bold gap-2">
-                <h1 className="text-[11px] font-bold cursor-pointer pt-4">
+                <h1 className="text-[11px] font-bold text-[#DC9B9B] cursor-pointer pt-4">
                     OBSESSED
                 </h1>
                 <div className="bg-gray-200 rounded-full border border-gray-300 w-8 h-8 mt-2 flex items-center justify-center cursor-pointer">
@@ -38,7 +38,7 @@ export default function NavbarHome() {
                     className="rounded-full cursor-pointer"
                     alt="profile"
                 />
-                <div className="flex flex-col pt-1">
+                <div className="flex flex-col pt-1 text-[#DC9B9B]">
                     <h1>
                         Ramli
                     </h1>

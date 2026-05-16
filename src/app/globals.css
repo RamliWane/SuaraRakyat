@@ -34,3 +34,22 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+ .main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+@media (min-width: 1280px) {
+  .main-grid {
+    grid-template-columns: 1.9fr 1.9fr 1fr;
+    grid-template-areas:
+      "header header aside"
+      "main main aside"
+      "footer footer aside";
+  }
+}

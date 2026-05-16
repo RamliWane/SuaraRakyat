@@ -43,28 +43,15 @@ export const libraryNav = [
   },
   {
     label: "Peta",
-    href: "/client/peta",
+    href: "/client/map",
     icon: (
        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3" />
                         <circle cx="12" cy="12" r="9" />
                     </svg>
     ),
-  },
-  {
-    label: "Favorite",
-    href: "/favorite",
-    icon: (
-       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
-                            C2 6 4 4 6.5 4 
-                            c1.74 0 3.41 0.81 4.5 2.09 
-                            C12.09 4.81 13.76 4 15.5 4 
-                            C18 4 20 6 20 8.5 
-                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-    ),
-  },
+  }
+
 ];
 
 export const menuNav = [

@@ -15,19 +15,19 @@ export default function Sidebar() {
             lg:translate-x-0 lg:w-50`}>
 
             <div className="h-full bg-[#1C1A18] shadow-xl text-white p-10 min-w-50">
-                <div className="m-4 space-y-6">
+                <div className="space-x-2 space-y-3">
                     <h3 className="text-[12px] font-bold -ml-5">NAVIGATION</h3>
                     <ul className="space-x-2">
                         {libraryNav.map((item) => (
                             <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-8 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>    
-                                    <div className="flex gap-2">    
+                                <li className={`flex items-center gap-2 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>    
+                                    {pathname === item.href && (
+                                        <div className="absolute left-3 w-1 h-6 bg-[#DC9B9B] rounded-full" />
+                                    )}
+                                    <div className="flex gap-2 text-[15px]">    
                                         {item.icon}
                                         {item.label}
                                     </div>
-                                    {pathname === item.href && (
-                                        <div className="w-1.5 h-6 pl-1 bg-[#DC9B9B] rounded-full"/>
-                                    )}
                                 </li>
                             </Link>
                         ))}
@@ -36,7 +36,7 @@ export default function Sidebar() {
                     <ul className="space-x-2">
                         {menuNav.map((item) => (
                             <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-1 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>
+                                <li className={`flex items-center gap-1 text-[15px] cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>
                                     {item.icon}
                                     {item.label}
                                 </li>
