@@ -92,9 +92,9 @@ const dummyData = [
 ];
 
 const statusStyle = {
-    Diproses: "bg-amber-50 text-amber-700",
-    Selesai: "bg-green-50 text-green-700",
-    Ditolak: "bg-red-50 text-red-600",
+    Diproses: "bg-orange-500 text-white",
+    Selesai: "bg-green-500 text-white",
+    Ditolak: "bg-red-500 text-white",
 };
 
 export default function LaporanCard() {

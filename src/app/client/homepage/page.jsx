@@ -1,11 +1,15 @@
+"use client";
 
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
 import RightBar from "../../components/client/RightBar";
 import LaporanCard from "../../components/client/LaporanCard";
 import FilterCategory from "../../components/client/FilterCategory";
+import { useRouter } from "next/navigation";
 
 export default function home() {
+
+    const router = useRouter();
 
     // // Fetch data users dari API
     // const users = await fetch("http://localhost:5000/users", {
@@ -14,6 +18,7 @@ export default function home() {
     // })
     //     .then(res => res.json())// Convert response jadi JSON
     //     .then(data => data.data);// Ambil property 'data' dari response
+
   const stats = [
     { label: "Total laporan Dibuat", value: "3", badge: "+12 hari ini", badgeColor: "bg-[#EAF3DE] text-[#27500A]", valueColor: "" },
     { label: "Diproses", value: "0", badge: "Sedang berjalan", badgeColor: "bg-[#E6F1FB] text-[#0C447C]", valueColor: "text-[#185FA5]" },
@@ -30,10 +35,18 @@ export default function home() {
                 <div className="main-grid overflow-y-auto overflow-x-hidden no-scrollbar animate-slide-up animate-delay-200 grid-rows-[auto_auto_auto]">
                     <header className="flex-1 [grid-area:header] min-w-0 p-0 sm:p-2 md:p-4 lg:p-4">
                         <div className="flex flex-col min-w-0 gap-3 p-3">
-                            <section>
-                                <h1 className="text-xl font-medium">Selamat datang, User 👋</h1>
-                                <p className="text-sm text-gray-500">Ini ringkasan laporan dan aktivitas terbaru kamu.</p>
-                            </section>
+                            <div className="flex justify-between">
+                                <section>
+                                    <h1 className="text-xl font-medium">Selamat datang, User 👋</h1>
+                                    <p className="text-sm text-gray-500">Ini ringkasan laporan dan aktivitas terbaru kamu.</p>
+                                </section>
+                                <button
+                                onClick={() => router.push("/client/bikinlaporan")}
+                                    className="px-3 bg-[#DC9B9B] text-[15px] rounded-md transition-colors whitespace-nowrap font-medium text-white"
+                                >
+                                   + Buat Laporan
+                                </button>
+                            </div>
                             <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                                 {stats.map((s) => (
                                 <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-100">
