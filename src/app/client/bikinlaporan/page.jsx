@@ -2,33 +2,49 @@
 
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
-import { useState } from "react";
 import Stepper from "../../components/client/StepperMain";
+import FormBikinLaporan from "../../components/client/FormBikinLaporan";
+import PanduanBikinLaporan from "../../components/client/PanduanBikinLaporan";
 
 export default function BikinLaporan() {
-    const [name, setName] = useState("");
-
     return (
-        <div className="h-screen flex flex-col overflow-hidden text-black">
+        <div className="flex h-screen flex-col overflow-hidden">
             <NavbarHome />
+
             <div className="flex flex-1 overflow-hidden">
-                <SideBar />
+                <SideBar className="flex-0" />
 
-                <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar animate-slide-up animate-delay-200">
-                    <header className="flex-1 min-w-0 p-0 sm:p-2 md:p-4 lg:p-4">
-                        <div className="flex flex-col min-w-0 gap-3 p-3">
-                            <section>
-                                <h1 className="text-xl font-bold">BUAT LAPORAN BARU</h1>
-                                <p className="text-sm text-gray-500">Laporkan Masalah Di Sekitar Anda Untuk Membantu Lingkungan Menjadi Lebih Baik</p>
-                            </section>
+                <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar p-5 animate-slide-up animate-delay-200">
+
+                    <div className="flex items-start gap-5">
+                        <div className="flex flex-1 flex-col gap-5">
+                            <header>
+                                <div className="flex flex-col gap-2">
+                                    <section>
+                                        <h1 className="text-xl font-bold text-black">
+                                            BUAT LAPORAN BARU
+                                        </h1>
+
+                                        <p className="text-sm text-gray-400">
+                                            Laporkan masalah di sekitar Anda
+                                            untuk membantu lingkungan menjadi
+                                            lebih baik
+                                        </p>
+                                    </section>
+
+                                    <Stepper />
+                                </div>
+                            </header>
+                            <main>
+                                <FormBikinLaporan />
+                            </main>
                         </div>
-                    </header>
-
-                    <main className="flex">
-                       <Stepper />
-                    </main>
+                        <aside className="hidden xl:block w-[270px] sticky top-0 shrink-0">
+                            <PanduanBikinLaporan />
+                        </aside>
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }

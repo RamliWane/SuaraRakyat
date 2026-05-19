@@ -70,9 +70,8 @@ export default function Stepper({
       <div
         className={`
           w-full
-          ml-4
           max-w-5xl
-          rounded-[28px]
+          rounded-[10px]
           border
           border-[#1B1B1B]
           bg-[#1C1A18]

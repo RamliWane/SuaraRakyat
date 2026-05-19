@@ -15,7 +15,7 @@ export default function StepperMain() {
         >
             {/* STEP 1 */}
             <Step>
-                <div className="space-y-3">
+                <div>
                     <span className="text-sm font-medium text-[#DC9B9B]">
                         Langkah 1
                     </span>
