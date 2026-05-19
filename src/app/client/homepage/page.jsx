@@ -6,6 +6,7 @@ import RightBar from "../../components/client/RightBar";
 import LaporanCard from "../../components/client/LaporanCard";
 import FilterCategory from "../../components/client/FilterCategory";
 import { useRouter } from "next/navigation";
+import HomeFooter from "../../components/client/HomeFooter";
 
 export default function home() {
 
@@ -77,6 +78,9 @@ export default function home() {
                             <LaporanCard />
                         </div>
                     </main>
+                    <footer className="[grid-area:footer]">
+                                <HomeFooter />
+                    </footer>
                 </div>
             </div>
         </div>

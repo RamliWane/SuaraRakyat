@@ -32,7 +32,7 @@ export default function NavbarHome() {
                     </svg>
                 </div>
                 <Image
-                    src="/reze.jpg"
+                    src="/assets/reze.jpeg"
                     width={48}
                     height={48}
                     className="rounded-full cursor-pointer"

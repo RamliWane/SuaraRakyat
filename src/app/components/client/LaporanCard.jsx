@@ -1,5 +1,7 @@
 "use client";
 
+import { Heart, MessageCircle, MessageCircleHeart } from "lucide-react";
+
 const dummyData = [
     {
         id: 1,
@@ -89,6 +91,28 @@ const dummyData = [
         deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
         gambar: null,
     },
+    {
+        id: 9,
+        status: "Diproses",
+        kategori: "Infrastruktur",
+        nama: "Rizky Ramadhan",
+        lokasi: "Kalibata",
+        waktu: "3 hari lalu",
+        judul: "Jembatan penghubung antar RW retak dan mulai ambles di bagian tengah",
+        deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
+        gambar: null,
+    },
+    {
+        id: 10,
+        status: "Diproses",
+        kategori: "Infrastruktur",
+        nama: "Rizky Ramadhan",
+        lokasi: "Kalibata",
+        waktu: "3 hari lalu",
+        judul: "Jembatan penghubung antar RW retak dan mulai ambles di bagian tengah",
+        deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
+        gambar: null,
+    }
 ];
 
 const statusStyle = {
@@ -99,7 +123,7 @@ const statusStyle = {
 
 export default function LaporanCard() {
     return (
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-5">
             {dummyData.map((laporan) => {
                 const { id, status, kategori, nama, lokasi, waktu, judul, deskripsi, gambar } = laporan;
                 const inisial = nama.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
@@ -129,6 +153,8 @@ export default function LaporanCard() {
                                 <span className="bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400 text-[11px] px-2 py-0.5 rounded-md border border-gray-200 dark:border-zinc-700">
                                     {kategori}
                                 </span>
+                                <Heart className="w-5 text-white" />
+                                <MessageCircle className="w-5 text-white" />
                             </div>
 
                             <div className="flex items-center gap-2">
