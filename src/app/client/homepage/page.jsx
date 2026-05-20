@@ -1,39 +1,58 @@
-"use client";
-
+import { cookies } from "next/headers";
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
 import RightBar from "../../components/client/RightBar";
 import LaporanCard from "../../components/client/LaporanCard";
 import FilterCategory from "../../components/client/FilterCategory";
-import { useRouter } from "next/navigation";
 import HomeFooter from "../../components/client/HomeFooter";
 
-export default function home() {
+export default async function home() {
+    let reporting = []; // Tempat penampung data utama
+    
+    try {
+        const cookieStore = await cookies();
+        const token = cookieStore.get("session_token")?.value; 
+        console.log("Token:", token);
 
-    const router = useRouter();
+        const res = await fetch("http://localhost:5000/reporting", {
+            method: "GET",
+            cache: "no-store",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        
+        console.log("Status HTTP:", res.status);
 
-    // // Fetch data users dari API
-    // const users = await fetch("http://localhost:5000/users", {
-    //     method: "GET",
-    //     cache: "no-store",
-    // })
-    //     .then(res => res.json())// Convert response jadi JSON
-    //     .then(data => data.data);// Ambil property 'data' dari response
+        const json = await res.json();
 
-  const stats = [
-    { label: "Total laporan Dibuat", value: "3", badge: "+12 hari ini", badgeColor: "bg-[#EAF3DE] text-[#27500A]", valueColor: "" },
-    { label: "Diproses", value: "0", badge: "Sedang berjalan", badgeColor: "bg-[#E6F1FB] text-[#0C447C]", valueColor: "text-[#185FA5]" },
-    { label: "Selesai", value: "3", badge: "90.6% resolusi", badgeColor: "bg-[#EAF3DE] text-[#27500A]", valueColor: "text-[#3B6D11]" },
-    { label: "Like", value: "48", badge: "Disukai", badgeColor: "bg-[#FAEEDA] text-[#633806]", valueColor: "text-[#BA7517]" },
-  ];
+        console.log("RAW JSON:", JSON.stringify(json)); // <-- tambahin ini
+        console.log("json.data:", json.data);
+        
+        reporting = json.data || []; 
+        
+        console.log("Data Array Laporan sukses di-parsing:", reporting); 
+    } catch (error) {
+        console.error("Gagal mengambil data dari database:", error);
+    }
+
+    const stats = [
+        { label: "Total laporan Dibuat", value: "3", badge: "+12 hari ini", badgeColor: "bg-[#EAF3DE] text-[#27500A]" },
+        { label: "Diproses", value: "0", badge: "Sedang berjalan", badgeColor: "bg-[#E6F1FB] text-[#0C447C]", valueColor: "text-[#185FA5]" },
+        { label: "Selesai", value: "3", badge: "90.6% resolusi", badgeColor: "bg-[#EAF3DE] text-[#27500A]", valueColor: "text-[#3B6D11]" },
+        { label: "Like", value: "48", badge: "Disukai", badgeColor: "bg-[#FAEEDA] text-[#633806]", valueColor: "text-[#BA7517]" },
+    ];
 
     return (
-        <div className="h-screen flex flex-col overflow-hidden text-black">
+        <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
             <NavbarHome />
             <div className="flex flex-1 overflow-hidden">
-                <SideBar className=" flex-0" />
+                <SideBar className="flex-0" />
 
-                <div className="main-grid overflow-y-auto overflow-x-hidden no-scrollbar animate-slide-up animate-delay-200 grid-rows-[auto_auto_auto]">
+                <div className="main-grid overflow-y-auto overflow-x-hidden no-scrollbar animate-slide-up animate-delay-200 grid-rows-[auto_auto_auto] flex-1">
+                    
+                    {/* Header Ringkasan */}
                     <header className="flex-1 [grid-area:header] min-w-0 p-0 sm:p-2 md:p-4 lg:p-4">
                         <div className="flex flex-col min-w-0 gap-3 p-3">
                             <div className="flex justify-between">
@@ -41,48 +60,51 @@ export default function home() {
                                     <h1 className="text-xl font-medium">Selamat datang, User 👋</h1>
                                     <p className="text-sm text-gray-500">Ini ringkasan laporan dan aktivitas terbaru kamu.</p>
                                 </section>
-                                <button
-                                onClick={() => router.push("/client/bikinlaporan")}
-                                    className="px-3 bg-[#DC9B9B] text-[15px] rounded-md transition-colors whitespace-nowrap font-medium text-white"
-                                >
+                                <button className="px-3 bg-[#DC9B9B] text-[15px] rounded-md transition-colors whitespace-nowrap font-medium text-white">
                                    + Buat Laporan
                                 </button>
                             </div>
                             <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                                 {stats.map((s) => (
-                                <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-100">
-                                    <p className="text-xs text-gray-500 mb-1">{s.label}</p>
-                                    <p className={`text-2xl font-medium mb-2 ${s.valueColor}`}>{s.value}</p>
-                                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${s.badgeColor}`}>{s.badge}</span>
-                                </div>
+                                    <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                                        <p className="text-xs text-gray-500 mb-1">{s.label}</p>
+                                        <p className={`text-2xl font-medium mb-2 ${s.valueColor || ""}`}>{s.value}</p>
+                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${s.badgeColor}`}>{s.badge}</span>
+                                    </div>
                                 ))}
                             </section>
                         </div>
                     </header>
 
+                    {/* Rightbar Kanan */}
                     <aside className="[grid-area:aside]">
                         <div className="hidden xl:block w-70 sticky top-0 h-screen overflow-y-auto no-scrollbar">
                             <RightBar />
                         </div>
                     </aside>
 
+                    {/* Area Konten Utama */}
                     <main className="flex [grid-area:main] flex-col m-5">
-                        <div className="flex flex-col gap-3 ">
-                            <section className="flex items-start justify-between flex-wrap">
+                        <div className="flex flex-col gap-3">
+                            <section className="flex items-start justify-between flex-wrap gap-2">
                                 <div className="flex flex-col">
                                     <h1 className="text-[17px] font-medium">Laporan Para Warga</h1>
-                                    <h1 className="text-[13px] font-medium">Laporan terbaru dari para warga</h1>
+                                    <h1 className="text-[13px] font-medium text-gray-400">Laporan terbaru dari para warga</h1>
                                 </div>
                                 <FilterCategory />
                             </section>
-                            <LaporanCard />
+                            
+                            {/* PASTIKAN BARIS INI: Mengirimkan data 'reporting' yang asli dari fetch */}
+                            <LaporanCard dataLaporan={reporting} />
                         </div>
                     </main>
+                    
+                    {/* Footer */}
                     <footer className="[grid-area:footer]">
-                                <HomeFooter />
+                        <HomeFooter />
                     </footer>
                 </div>
             </div>
         </div>
-    )
+    );
 }

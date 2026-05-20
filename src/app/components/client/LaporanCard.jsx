@@ -1,139 +1,44 @@
 "use client";
 
-import { Heart, MessageCircle, MessageCircleHeart } from "lucide-react";
-
-const dummyData = [
-    {
-        id: 1,
-        status: "Diproses",
-        kategori: "Infrastruktur",
-        nama: "Rina Handayani",
-        lokasi: "Kebayoran Baru",
-        waktu: "2 jam lalu",
-        judul: "Jalan berlubang depan SDN 04 sangat berbahaya, sudah 2 motor jatuh",
-        deskripsi: "Lubang sedalam ±30cm dan lebar 50cm. Saat hujan tertutup air sehingga tidak terlihat. Mohon segera diperbaiki.",
-        gambar: null,
-    },
-    {
-        id: 2,
-        status: "Selesai",
-        kategori: "Lingkungan",
-        nama: "Budi Santoso",
-        lokasi: "Tebet",
-        waktu: "5 jam lalu",
-        judul: "Tumpukan sampah liar di pinggir jalan sudah seminggu tidak diangkut",
-        deskripsi: "Bau menyengat mengganggu warga sekitar. Sudah lapor RT tapi belum ada tindakan.",
-        gambar: null,
-    },
-    {
-        id: 3,
-        status: "Ditolak",
-        kategori: "Keamanan",
-        nama: "Sari Dewi",
-        lokasi: "Menteng",
-        waktu: "1 hari lalu",
-        judul: "Lampu jalan mati di gang sempit rawan kejahatan",
-        deskripsi: "Sudah 3 minggu mati. Warga takut keluar malam.",
-        gambar: null,
-    },
-    {
-        id: 4,
-        status: "Diproses",
-        kategori: "Infrastruktur",
-        nama: "Ahmad Fauzi",
-        lokasi: "Jaksel",
-        waktu: "1 hari lalu",
-        judul: "Saluran air mampet menyebabkan banjir setiap hujan deras turun",
-        deskripsi: "Air meluap sampai masuk ke rumah warga. Sudah terjadi 4 kali bulan ini. Kami mohon segera ditangani karena kerugian material cukup besar.",
-        gambar: null,
-    },
-    {
-        id: 5,
-        status: "Selesai",
-        kategori: "Pendidikan",
-        nama: "Mega Pratiwi",
-        lokasi: "Cijantung",
-        waktu: "2 hari lalu",
-        judul: "Atap kelas SDN 07 bocor parah saat hujan",
-        deskripsi: "Murid terpaksa belajar dengan payung. Sudah dilaporkan ke pihak sekolah namun belum ada respons dari dinas.",
-        gambar: null,
-    },
-    {
-        id: 6,
-        status: "Diproses",
-        kategori: "Lingkungan",
-        nama: "Hendra Wijaya",
-        lokasi: "Pasar Minggu",
-        waktu: "2 hari lalu",
-        judul: "Pohon besar condong ke kabel listrik sangat berbahaya",
-        deskripsi: "Ranting sudah menyentuh kabel PLN. Khawatir roboh saat angin kencang.",
-        gambar: null,
-    },
-    {
-        id: 7,
-        status: "Selesai",
-        kategori: "Keamanan",
-        nama: "Lilis Suryani",
-        lokasi: "Mampang",
-        waktu: "3 hari lalu",
-        judul: "CCTV di area pasar mati semua sejak bulan lalu",
-        deskripsi: "Beberapa kasus copet terjadi setelah CCTV mati. Warga resah.",
-        gambar: null,
-    },
-    {
-        id: 8,
-        status: "Diproses",
-        kategori: "Infrastruktur",
-        nama: "Rizky Ramadhan",
-        lokasi: "Kalibata",
-        waktu: "3 hari lalu",
-        judul: "Jembatan penghubung antar RW retak dan mulai ambles di bagian tengah",
-        deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
-        gambar: null,
-    },
-    {
-        id: 9,
-        status: "Diproses",
-        kategori: "Infrastruktur",
-        nama: "Rizky Ramadhan",
-        lokasi: "Kalibata",
-        waktu: "3 hari lalu",
-        judul: "Jembatan penghubung antar RW retak dan mulai ambles di bagian tengah",
-        deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
-        gambar: null,
-    },
-    {
-        id: 10,
-        status: "Diproses",
-        kategori: "Infrastruktur",
-        nama: "Rizky Ramadhan",
-        lokasi: "Kalibata",
-        waktu: "3 hari lalu",
-        judul: "Jembatan penghubung antar RW retak dan mulai ambles di bagian tengah",
-        deskripsi: "Jembatan ini digunakan ratusan warga tiap hari untuk akses ke pasar dan sekolah. Retakan semakin lebar tiap minggu dan sudah mulai ambles di tengah. Sangat berbahaya untuk pejalan kaki dan motor.",
-        gambar: null,
-    }
-];
+import { Heart, MessageCircle } from "lucide-react";
 
 const statusStyle = {
-    Diproses: "bg-orange-500 text-white",
-    Selesai: "bg-green-500 text-white",
-    Ditolak: "bg-red-500 text-white",
+    proses: "bg-blue-50 text-blue-600 border border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-900/50",
+    ditolak: "bg-red-600 text-amber-600 border border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900/50",
+    selesai: "bg-emerald-50 text-emerald-600 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50",
 };
 
-export default function LaporanCard() {
+export default function LaporanCard({dataLaporan}) {
+    console.log("Data yang diterima komponen LaporanCard:", dataLaporan);
+
+    // Jika dataLaporan bukan array (misal berupa object error dari backend)
+    if (!Array.isArray(dataLaporan)) {
+        return (
+            <div className="text-sm text-red-500 p-5 text-center border rounded-xl bg-red-50">
+                Gagal memuat laporan: Token login tidak valid atau kedaluwarsa. Silakan login ulang.
+            </div>
+        );
+    }
+
+    if (dataLaporan.length === 0) {
+        return (
+            <div className="text-sm font-medium text-gray-400 p-8 text-center border-2 border-dashed border-gray-200 rounded-xl w-full">
+                Data laporan di database kosong.
+            </div>
+        );
+    }
+
     return (
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-5">
-            {dummyData.map((laporan) => {
-                const { id, status, kategori, nama, lokasi, waktu, judul, deskripsi, gambar } = laporan;
-                const inisial = nama.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 w-full block">
+            {dataLaporan.map((laporan) => {
+                const { id, status, lokasi, username, judul, deskripsi, image, urgensi, category_name  } = laporan;
 
                 return (
-                    <div key={id} className="break-inside-avoid mb-4 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 overflow-hidden">
+                    <div key={id} className="break-inside-avoid mb-4 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 overflow-hidden shadow-sm">
                         
                         <div className="bg-zinc-800 h-[120px] flex items-center justify-center">
-                            {gambar ? (
-                                <img src={gambar} alt="foto laporan" className="w-full h-full object-cover" />
+                            {image && image !== "no-image.jpg" ? (
+                                <img src={image} alt="foto laporan" className="w-full h-full object-cover" />
                             ) : (
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M4 17l4-8 4 4 2-3 4 7H4z" /><circle cx="9" cy="9" r="1" />
@@ -144,36 +49,44 @@ export default function LaporanCard() {
                         <div className="p-3 flex flex-col gap-2.5">
 
                             <div className="flex gap-1.5 flex-wrap">
-                                <span className={`inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md ${statusStyle[status] ?? "bg-gray-100 text-gray-600"}`}>
+                                <span className={`inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md ${statusStyle[status] || "bg-gray-100 text-gray-600"}`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                                     </svg>
-                                    {status}
+                                    {status || "pending"}
                                 </span>
-                                <span className="bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400 text-[11px] px-2 py-0.5 rounded-md border border-gray-200 dark:border-zinc-700">
-                                    {kategori}
+
+                                <span className="bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400 text-[11px] px-2 py-0.5 rounded-md border border-red-200 dark:border-red-900/50">
+                                    {urgensi || "rendah"}
                                 </span>
-                                <Heart className="w-5 text-white" />
-                                <MessageCircle className="w-5 text-white" />
+
+                                <span className="bg-black text-white text-[11px] px-2 py-0.5 rounded-md border">
+                                    {category_name}
+                                </span>
+
+                                <div className="flex gap-1 ml-auto text-gray-400">
+                                    <Heart className="w-4 h-4 cursor-pointer hover:text-red-500 transition-colors" />
+                                    <MessageCircle className="w-4 h-4 cursor-pointer hover:text-blue-500 transition-colors" />
+                                </div>
                             </div>
 
                             <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[12px] font-medium shrink-0">
-                                    {inisial}
+                                    {username ? username.charAt(0).toUpperCase() : "U"}
                                 </div>
                                 <div>
-                                    <p className="text-[13px] font-medium text-gray-900 dark:text-white">{nama}</p>
+                                    <p className="text-[13px] font-medium text-gray-900 dark:text-white">{username}</p>
                                     <p className="text-[11px] text-gray-500 dark:text-zinc-400 flex items-center gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                                         </svg>
-                                        {lokasi} · {waktu}
+                                        {lokasi || "Lokasi TKP"}
                                     </p>
                                 </div>
                             </div>
 
                             <div className="border-t border-gray-100 dark:border-zinc-700 pt-2.5">
-                                <p className="text-[13px] font-medium text-gray-900 dark:text-white leading-snug mb-1">{judul}</p>
+                                <p className="text-[13px] font-medium text-gray-900 dark:text-white leading-snug mb-1">{judul || "Tanpa Judul"}</p>
                                 <p className="text-[12px] text-gray-500 dark:text-zinc-400 leading-relaxed">{deskripsi}</p>
                             </div>
 
