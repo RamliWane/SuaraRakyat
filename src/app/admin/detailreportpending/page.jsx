@@ -1,7 +1,7 @@
+import ActionDetailLaporan from '../../components/admin/ActionDetailLaporan';
 import DetailLaporanPending from '../../components/admin/DetailLaporanPending';
 import SidebarAdmin from '../../components/admin/SideBarAdmin';
 import NavbarHome from '../../components/client/NavbarHome';
-import PanduanBikinLaporan from '../../components/client/PanduanBikinLaporan';
 
 export default async function detailLaporanPending() {
     return (
@@ -11,7 +11,7 @@ export default async function detailLaporanPending() {
             <div className="flex flex-1 overflow-hidden">
                 <SidebarAdmin className="flex-0" />
 
-                <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar p-5 animate-slide-up animate-delay-200">
+                <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar p-4 animate-slide-up animate-delay-200">
 
                     <div className="flex items-start gap-5">
                         <div className="flex flex-1 flex-col gap-5">
@@ -34,8 +34,8 @@ export default async function detailLaporanPending() {
                                 <DetailLaporanPending />
                             </main>
                         </div>
-                        <aside className="hidden xl:block w-[270px] sticky top-0 shrink-0">
-                            <PanduanBikinLaporan />
+                        <aside className="hidden xl:block w-[280px] sticky top-0 shrink-0">
+                            <ActionDetailLaporan />
                         </aside>
                     </div>
                 </div>
