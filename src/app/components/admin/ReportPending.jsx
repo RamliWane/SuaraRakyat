@@ -16,7 +16,7 @@ export default function SubmissionPending() {
     laporan: "Laporan",
     categories: "Infrastruktur",
     urgentas: "Urgent",
-    alamat: "Jalan Rusak di Jl. Sudirman",
+    status: "Diproses"
   },
 
 ]
@@ -27,7 +27,7 @@ export default function SubmissionPending() {
         <span>No</span>
         <span>Gambar</span>
         <span>Username</span>
-        <span>Alamat</span>
+        <span>Status</span>
         <span>Kategori</span>
         <span>Urgentas</span>
         <span>Action</span>
@@ -58,7 +58,7 @@ export default function SubmissionPending() {
 
                 <span className=" text-gray-600 text-sm">{item.username}</span>
 
-                <span className="text-sm text-gray-600">{item.alamat}</span>
+                <span className="text-sm text-gray-600">{item.status}</span>
 
                 <span className="text-sm text-gray-600">{item.categories}</span>
 

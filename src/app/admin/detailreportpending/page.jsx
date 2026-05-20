@@ -19,7 +19,7 @@ export default async function detailLaporanPending() {
                                 <div className="flex flex-col gap-2">
                                     <section>
                                         <h1 className="text-xl font-bold text-black">
-                                            BUAT LAPORAN BARU
+                                            DETAIL LAPORAN ADMIN
                                         </h1>
 
                                         <p className="text-sm text-gray-400">

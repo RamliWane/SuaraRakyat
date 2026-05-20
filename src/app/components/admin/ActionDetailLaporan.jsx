@@ -1,12 +1,8 @@
-"use client";
+"use client"
 
+import { useState } from "react";
 import React from "react";
-import {
-    TrendingUp,
-    Clock3,
-    MessageCircleCheck,
-    CircleCheck,
-} from "lucide-react";
+import { TrendingUp, Clock3, CircleCheck, Send } from "lucide-react";
 
 const panduan = [
     {
@@ -61,72 +57,86 @@ const kategori = [
 ];
 
 export default function ActionDetailLaporan() {
+
+    const [status, setStatus] = useState("Menunggu review");
+    const [priority, setPriority] = useState("");
+    const [assignee, setAssignee] = useState("");
+    const [note, setNote] = useState("");
+
     return (
         <div className="flex w-full flex-col gap-2">
-
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-5">
-                    <h2 className="text-sm font-bold text-white">
-                        Panduan Membuat Laporan
-                    </h2>
-
-                    <p className="mt-1 text-xs leading-relaxed text-[#7A7A7A]">
-                        Ikuti langkah berikut agar laporan cepat diproses.
-                    </p>
+            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5 text-white">
+                <h2 className="text-sm font-semibold text-gray-300">AKSI ADMIN</h2>
+                <div>
+                    <label className="text-xs text-gray-400">Status laporan</label>
+                    <select
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm"
+                    >
+                        <option>Menunggu review</option>
+                        <option>Diproses</option>
+                        <option>Selesai</option>
+                    </select>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    {panduan.map((item) => (
-                        <div
-                            key={item.id}
-                            className="flex gap-3 "
-                        >
-                            <div className="flex gap-3">
-                                <div className="w-4 h-4">
-                                    {item.icon}
-                                </div>
-                                <span className="text-[12px] font-medium text-white">
-                                    {item.title}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
+                <div>
+                    <label className="text-xs text-gray-400">Prioritas</label>
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                        {["Darurat", "Tinggi", "Sedang", "Rendah"].map((item) => (
+                            <button
+                                key={item}
+                                onClick={() => setPriority(item)}
+                                className={`border rounded-md py-1 text-sm ${priority === item
+                                    ? "bg-blue-600 border-blue-600"
+                                    : "border-gray-500"
+                                    }`}
+                            >
+                                {item}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div>
+                    <label className="text-xs text-gray-400">Assign ke dinas/petugas</label>
+                    <select
+                        value={assignee}
+                        onChange={(e) => setAssignee(e.target.value)}
+                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm"
+                    >
+                        <option value="">— Pilih petugas —</option>
+                        <option value="petugas1">Petugas 1</option>
+                        <option value="petugas2">Petugas 2</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label className="text-xs text-gray-400">Catatan internal</label>
+                    <textarea
+                        value={note}
+                        onChange={(e) => setNote(e.target.value)}
+                        placeholder="Catatan untuk tim internal (tidak terlihat warga)..."
+                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm h-20 resize-none"
+                    />
+                </div>
+                <div className="mt-3 flex flex-col gap-2">
+
+                    <div className="flex gap-2 mt-auto">
+                        <button className="flex-1 border border-gray-500 rounded-md py-2 text-sm hover:bg-gray-700">
+                            ✕ Tolak
+                        </button>
+                        <button className="flex-1 bg-green-600 rounded-md py-2 text-sm hover:bg-green-700">
+                            ✔ Verifikasi
+                        </button>
+                    </div>
+
+                    <button className="w-full border border-gray-500 rounded-md py-2 text-sm hover:bg-gray-700 flex items-center justify-center gap-2">
+                        <Send size={16} />
+                        Kirim notifikasi ke warga
+                    </button>
                 </div>
             </div>
-
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-sm font-bold text-white">
-                        Kategori Populer
-                    </h2>
-
-                    <TrendingUp size={16} className="text-[#DC9B9B]" />
-                </div>
-
-                <div className="flex flex-col gap-3">
-                    {kategori.map((item, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center gap-3 rounded-2xl bg-[#131313] p-3"
-                        >
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#222222]">
-                                {item.icon}
-                            </div>
-
-                            <div className="flex flex-col">
-                                <span className="text-sm font-medium text-white">
-                                    {item.title}
-                                </span>
-
-                                <span className="text-[11px] text-[#7A7A7A]">
-                                    {item.total}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
             <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
                 <div className="mb-4 flex items-center gap-2">
                     <Clock3 size={16} className="text-[#DC9B9B]" />
