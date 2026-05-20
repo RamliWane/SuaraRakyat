@@ -3,7 +3,6 @@ import NavbarHome from '../../components/client/NavbarHome';
 import ReportPending from "../../components/admin/ReportPending";
 
 export default async function KatalogClone() {
-
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black">
             <NavbarHome />
