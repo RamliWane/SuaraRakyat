@@ -1,6 +1,8 @@
 "use client";
 
 import { Heart, MessageCircle } from "lucide-react";
+import CommentButton from "./CommentButton";
+import LikeButton from "./LikeButton";
 
 const statusStyle = {
     proses: "bg-blue-50 text-blue-600 border border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-900/50",
@@ -8,7 +10,7 @@ const statusStyle = {
     selesai: "bg-emerald-50 text-emerald-600 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50",
 };
 
-export default function LaporanCard({dataLaporan}) {
+export default function LaporanCard({ dataLaporan, token }) {
     console.log("Data yang diterima komponen LaporanCard:", dataLaporan);
 
     // Jika dataLaporan bukan array (misal berupa object error dari backend)
@@ -65,8 +67,15 @@ export default function LaporanCard({dataLaporan}) {
                                 </span>
 
                                 <div className="flex gap-1 ml-auto text-gray-400">
-                                    <Heart className="w-4 h-4 cursor-pointer hover:text-red-500 transition-colors" />
-                                    <MessageCircle className="w-4 h-4 cursor-pointer hover:text-blue-500 transition-colors" />
+                                    <LikeButton />
+                                    <CommentButton 
+                                        reportId={id} 
+                                        token={token}
+                                        username={username}
+                                        judul={judul}
+                                        deskripsi={deskripsi}
+                                        image={image}
+                                    />
                                 </div>
                             </div>
 

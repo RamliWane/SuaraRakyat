@@ -5,8 +5,11 @@ import RightBar from "../../components/client/RightBar";
 import LaporanCard from "../../components/client/LaporanCard";
 import FilterCategory from "../../components/client/FilterCategory";
 import HomeFooter from "../../components/client/HomeFooter";
+import ButtonBuatLaporan from "../../components/client/ButtonBuatLaporan";
 
 export default async function home() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("session_token")?.value;
     let reporting = []; // Tempat penampung data utama
     
     try {
@@ -52,7 +55,6 @@ export default async function home() {
 
                 <div className="main-grid overflow-y-auto overflow-x-hidden no-scrollbar animate-slide-up animate-delay-200 grid-rows-[auto_auto_auto] flex-1">
                     
-                    {/* Header Ringkasan */}
                     <header className="flex-1 [grid-area:header] min-w-0 p-0 sm:p-2 md:p-4 lg:p-4">
                         <div className="flex flex-col min-w-0 gap-3 p-3">
                             <div className="flex justify-between">
@@ -60,9 +62,7 @@ export default async function home() {
                                     <h1 className="text-xl font-medium">Selamat datang, User 👋</h1>
                                     <p className="text-sm text-gray-500">Ini ringkasan laporan dan aktivitas terbaru kamu.</p>
                                 </section>
-                                <button className="px-3 bg-[#DC9B9B] text-[15px] rounded-md transition-colors whitespace-nowrap font-medium text-white">
-                                   + Buat Laporan
-                                </button>
+                                <ButtonBuatLaporan />
                             </div>
                             <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                                 {stats.map((s) => (
@@ -76,14 +76,12 @@ export default async function home() {
                         </div>
                     </header>
 
-                    {/* Rightbar Kanan */}
                     <aside className="[grid-area:aside]">
                         <div className="hidden xl:block w-70 sticky top-0 h-screen overflow-y-auto no-scrollbar">
                             <RightBar />
                         </div>
                     </aside>
 
-                    {/* Area Konten Utama */}
                     <main className="flex [grid-area:main] flex-col m-5">
                         <div className="flex flex-col gap-3">
                             <section className="flex items-start justify-between flex-wrap gap-2">
@@ -94,12 +92,10 @@ export default async function home() {
                                 <FilterCategory />
                             </section>
                             
-                            {/* PASTIKAN BARIS INI: Mengirimkan data 'reporting' yang asli dari fetch */}
-                            <LaporanCard dataLaporan={reporting} />
+                           <LaporanCard dataLaporan={reporting} token={token} />
                         </div>
                     </main>
                     
-                    {/* Footer */}
                     <footer className="[grid-area:footer]">
                         <HomeFooter />
                     </footer>
