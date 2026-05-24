@@ -48,7 +48,7 @@ export default async function home() {
     ];
 
     return (
-        <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
+        <div className="h-screen flex flex-col overflow-hidden text-black bg-white">
             <NavbarHome />
             <div className="flex flex-1 overflow-hidden">
                 <SideBar className="flex-0" />

@@ -1,50 +1,82 @@
 "use client"
-import { AdminNavigation, AdminNavigationMenu} from "../../../lib/navigationitems";
+import { AdminNavigation, AdminNavigationMenu } from "../../../lib/navigationitems";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react";
 
-
-export default function Sidebar() {
+export default function SidebarAdmin() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
     return (
-        <div className={`h-screen transform transition-all border-r border-gray-300 duration-300 overflow-hidden shrink-0
-            ${isOpen ? "translate-x-0 w-50" : "-translate-x-full w-0"}
-            lg:translate-x-0 lg:w-50`}>
+        <>
+            {/* Hamburger button — mobile only */}
+            <button
+                onClick={() => setIsOpen(p => !p)}
+                className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-emerald-700 text-white rounded-xl flex items-center justify-center shadow-lg border-0 cursor-pointer"
+                aria-label="Toggle sidebar"
+            >
+                <i className={`ti ${isOpen ? "ti-x" : "ti-menu-2"} text-lg`} />
+            </button>
 
-            <div className="h-full bg-[#1C1A18] shadow-xl text-white p-10 min-w-50">
-                <div className="space-x-2 space-y-3">
-                    <h3 className="text-[12px] font-bold -ml-5">NAVIGATION</h3>
-                    <ul className="space-x-2">
-                        {AdminNavigation.map((item) => (
-                            <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-2 cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>    
-                                    {pathname === item.href && (
-                                        <div className="absolute left-3 w-1 h-6 bg-[#DC9B9B] rounded-full" />
-                                    )}
-                                    <div className="flex gap-2 text-[15px]">    
-                                        {item.icon}
-                                        {item.label}
-                                    </div>
-                                </li>
-                            </Link>
-                        ))}
-                    </ul>
-                    <h3 className="text-[12px] font-bold -ml-5">MENU</h3>
-                    <ul className="space-x-2">
-                        {AdminNavigationMenu.map((item) => (
-                            <Link href={item.href} key={item.label}>
-                                <li className={`flex items-center gap-1 text-[15px] cursor-pointer ${pathname === item.href ? "text-[#DC9B9B]" : "hover:text-[#DC9B9B] text-white"}`}>
-                                    {item.icon}
-                                    {item.label}
-                                </li>
-                            </Link>
-                        ))}
-                    </ul>
+            {/* Backdrop — mobile only */}
+            {isOpen && (
+                <div
+                    className="lg:hidden fixed inset-0 bg-black/30 z-30"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+
+            {/* Sidebar */}
+            <div className={`fixed lg:static top-0 left-0 h-screen z-40 shrink-0
+                transform transition-transform duration-300
+                ${isOpen ? "translate-x-0" : "-translate-x-full"}
+                lg:translate-x-0 w-[200px]`}>
+
+                <div className="h-full bg-[#A2CB8B] shadow-xl text-white flex flex-col py-8 px-5">
+                    <div className="flex flex-col gap-6 flex-1">
+                        <div>
+                            <h1 className="text-[10px] font-bold tracking-widest text-white uppercase mb-3 px-1">
+                                NAVIGATION
+                            </h1>
+                            <ul className="flex flex-col gap-1">
+                                {AdminNavigation.map((item) => (
+                                    <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>
+                                        <li className={`relative flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[14px] font-medium cursor-pointer transition-all duration-200
+                                            ${pathname === item.href
+                                                ? "bg-white text-[#A2CB8B]"
+                                                : "text-white hover:bg-white/10 hover:text-white"
+                                            }`}>
+                                            {item.icon}
+                                            {item.label}
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h1 className="text-[10px] font-bold tracking-widest text-white uppercase mb-3 px-1">
+                                MENU
+                            </h1>
+                            <ul className="flex flex-col gap-1">
+                                {AdminNavigationMenu.map((item) => (
+                                    <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>
+                                        <li className={`relative flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[14px] font-medium cursor-pointer transition-all duration-200
+                                            ${pathname === item.href
+                                                ? "bg-white text-[#A2CB8B]"
+                                                : "text-white hover:bg-white/10 hover:text-white"
+                                            }`}>
+                                            {item.icon}
+                                            {item.label}
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

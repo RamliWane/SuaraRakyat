@@ -1,75 +1,147 @@
 "use client";
 
-import { Heart, MessageCircle } from "lucide-react";
 import CommentButton from "./CommentButton";
 import LikeButton from "./LikeButton";
 
-const statusStyle = {
-    proses: "bg-blue-50 text-blue-600 border border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-900/50",
-    ditolak: "bg-red-600 text-amber-600 border border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900/50",
-    selesai: "bg-emerald-50 text-emerald-600 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50",
+const statusConfig = {
+    proses: {
+        label: "Diproses",
+        cls: "bg-blue-50 text-blue-800 border-blue-200",
+        dot: "bg-blue-500",
+    },
+    ditolak: {
+        label: "Ditolak",
+        cls: "bg-red-50 text-red-800 border-red-200",
+        dot: "bg-red-500",
+    },
+    selesai: {
+        label: "Selesai",
+        cls: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        dot: "bg-emerald-500",
+    },
 };
 
-export default function LaporanCard({ dataLaporan, token }) {
-    console.log("Data yang diterima komponen LaporanCard:", dataLaporan);
+const urgensiConfig = {
+    tinggi: "bg-red-50 text-red-800 border-red-200",
+    sedang: "bg-amber-50 text-amber-800 border-amber-200",
+    rendah: "bg-gray-50 text-gray-600 border-gray-200",
+};
 
-    // Jika dataLaporan bukan array (misal berupa object error dari backend)
+const avatarPalette = [
+    "bg-violet-100 text-violet-700",
+    "bg-teal-100 text-teal-700",
+    "bg-amber-100 text-amber-700",
+    "bg-rose-100 text-rose-700",
+    "bg-sky-100 text-sky-700",
+];
+
+function getAvatar(username = "") {
+    return avatarPalette[username.charCodeAt(0) % avatarPalette.length];
+}
+
+export default function LaporanCard({ dataLaporan, token }) {
     if (!Array.isArray(dataLaporan)) {
         return (
-            <div className="text-sm text-red-500 p-5 text-center border rounded-xl bg-red-50">
-                Gagal memuat laporan: Token login tidak valid atau kedaluwarsa. Silakan login ulang.
+            <div className="flex flex-col items-center justify-center py-16 text-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+                    <i className="ti ti-alert-circle text-xl text-red-500" />
+                </div>
+                <p className="text-sm font-medium text-gray-800">Sesi login kedaluwarsa</p>
+                <p className="text-xs text-gray-400">Silakan login ulang untuk melihat laporan.</p>
             </div>
         );
     }
 
     if (dataLaporan.length === 0) {
         return (
-            <div className="text-sm font-medium text-gray-400 p-8 text-center border-2 border-dashed border-gray-200 rounded-xl w-full">
-                Data laporan di database kosong.
+            <div className="flex flex-col items-center justify-center py-20 text-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center">
+                    <i className="ti ti-inbox text-xl text-gray-400" />
+                </div>
+                <p className="text-sm font-medium text-gray-700">Belum ada laporan</p>
+                <p className="text-xs text-gray-400">Database laporan masih kosong.</p>
             </div>
         );
     }
 
     return (
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 w-full block">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 w-full">
             {dataLaporan.map((laporan) => {
-                const { id, status, lokasi, username, judul, deskripsi, image, urgensi, category_name  } = laporan;
+                const { id, status, lokasi, username, judul, deskripsi, image, urgensi, category_name } = laporan;
+                const statusCfg = statusConfig[status];
+                const avatarColor = getAvatar(username);
 
                 return (
-                    <div key={id} className="break-inside-avoid mb-4 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 overflow-hidden shadow-sm">
-                        
-                        <div className="bg-zinc-800 h-[120px] flex items-center justify-center">
+                    <div
+                        key={id}
+                        className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-emerald-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
+                    >
+                        {/* Image */}
+                        <div className="relative h-[120px] bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
                             {image && image !== "no-image.jpg" ? (
-                                <img src={image} alt="foto laporan" className="w-full h-full object-cover" />
+                                <img
+                                    src={image}
+                                    alt="foto laporan"
+                                    className="w-full h-full object-cover"
+                                />
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M4 17l4-8 4 4 2-3 4 7H4z" /><circle cx="9" cy="9" r="1" />
-                                </svg>
+                                <i className="ti ti-photo-off text-2xl text-gray-300" aria-hidden="true" />
+                            )}
+                            {category_name && (
+                                <span className="absolute top-2 left-2 bg-black/55 text-white text-[10px] font-medium px-2 py-1 rounded-md">
+                                    {category_name}
+                                </span>
                             )}
                         </div>
 
-                        <div className="p-3 flex flex-col gap-2.5">
+                        {/* Body */}
+                        <div className="flex flex-col gap-2.5 p-3.5 flex-1">
 
+                            {/* Badges */}
                             <div className="flex gap-1.5 flex-wrap">
-                                <span className={`inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-md ${statusStyle[status] || "bg-gray-100 text-gray-600"}`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                                    </svg>
-                                    {status || "pending"}
-                                </span>
+                                {statusCfg && (
+                                    <span className={`inline-flex items-center gap-1.5 text-[10px] font-medium px-2 py-0.5 rounded-md border ${statusCfg.cls}`}>
+                                        <span className={`w-1.5 h-1.5 rounded-full ${statusCfg.dot}`} />
+                                        {statusCfg.label}
+                                    </span>
+                                )}
+                                {urgensi && (
+                                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md border ${urgensiConfig[urgensi] ?? urgensiConfig.rendah}`}>
+                                        {urgensi.charAt(0).toUpperCase() + urgensi.slice(1)}
+                                    </span>
+                                )}
+                            </div>
 
-                                <span className="bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400 text-[11px] px-2 py-0.5 rounded-md border border-red-200 dark:border-red-900/50">
-                                    {urgensi || "rendah"}
-                                </span>
+                            {/* Title + desc */}
+                            <div className="flex-1">
+                                <h3 className="text-[13px] font-semibold text-gray-900 leading-snug mb-1 line-clamp-2">
+                                    {judul || "Tanpa Judul"}
+                                </h3>
+                                <p className="text-[11px] text-gray-400 leading-relaxed line-clamp-2">
+                                    {deskripsi}
+                                </p>
+                            </div>
 
-                                <span className="bg-black text-white text-[11px] px-2 py-0.5 rounded-md border">
-                                    {category_name}
-                                </span>
-
-                                <div className="flex gap-1 ml-auto text-gray-400">
+                            {/* Footer */}
+                            <div className="flex items-center justify-between pt-2.5 border-t border-gray-100 mt-auto">
+                                <div className="flex items-center gap-2 min-w-0">
+                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${avatarColor}`}>
+                                        {username?.charAt(0).toUpperCase() ?? "U"}
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="text-[11px] font-medium text-gray-700 truncate">{username || "Anonim"}</p>
+                                        {lokasi && (
+                                            <p className="text-[10px] text-gray-400 flex items-center gap-0.5 truncate">
+                                                <i className="ti ti-map-pin text-[10px]" aria-hidden="true" />
+                                                {lokasi}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-1 shrink-0">
                                     <LikeButton />
-                                    <CommentButton 
-                                        reportId={id} 
+                                    <CommentButton
+                                        reportId={id}
                                         token={token}
                                         username={username}
                                         judul={judul}
@@ -78,27 +150,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                                     />
                                 </div>
                             </div>
-
-                            <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[12px] font-medium shrink-0">
-                                    {username ? username.charAt(0).toUpperCase() : "U"}
-                                </div>
-                                <div>
-                                    <p className="text-[13px] font-medium text-gray-900 dark:text-white">{username}</p>
-                                    <p className="text-[11px] text-gray-500 dark:text-zinc-400 flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-                                        </svg>
-                                        {lokasi || "Lokasi TKP"}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="border-t border-gray-100 dark:border-zinc-700 pt-2.5">
-                                <p className="text-[13px] font-medium text-gray-900 dark:text-white leading-snug mb-1">{judul || "Tanpa Judul"}</p>
-                                <p className="text-[12px] text-gray-500 dark:text-zinc-400 leading-relaxed">{deskripsi}</p>
-                            </div>
-
                         </div>
                     </div>
                 );

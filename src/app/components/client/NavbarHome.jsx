@@ -1,13 +1,18 @@
 import Image from "next/image";
 export default function NavbarHome() {
     return (
-        <div className="w-full h-16 bg-[#1C1A18] flex items-center justify-between px-6 py-2">
+        <div className="w-full h-16 bg-[#A2CB8B] flex items-center justify-between px-6 py-2">
             <div className="flex items-center gap-8">
-                <h1 className="font-bold text-[20px] text-[#DC9B9B]">SuaraRakyat</h1>
+                <Image
+                    src="/assets/logo3.png"
+                    width={130}
+                    height={130}
+                    alt="logo"
+                />
             </div>
 
             <div className="flex text-[13px] font-bold gap-2">
-                <h1 className="text-[11px] font-bold text-[#DC9B9B] cursor-pointer pt-4">
+                <h1 className="text-[11px] font-bold text-white cursor-pointer pt-4">
                     OBSESSED
                 </h1>
                 <div className="bg-gray-200 rounded-full border border-gray-300 w-8 h-8 mt-2 flex items-center justify-center cursor-pointer">
@@ -38,7 +43,7 @@ export default function NavbarHome() {
                     className="rounded-full cursor-pointer"
                     alt="profile"
                 />
-                <div className="flex flex-col pt-1 text-[#DC9B9B]">
+                <div className="flex flex-col pt-1 text-white">
                     <h1>
                         Ramli
                     </h1>

@@ -14,7 +14,7 @@ export default function FilterCategory() {
                 onClick={() => setActiveFilter(filter)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-1 text-[13px] rounded-md transition-colors whitespace-nowrap ${
                     activeFilter === filter
-                        ? "bg-[#DC9B9B] text-white"
+                        ? "bg-[#A2CB8B] text-white"
                         : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                 }`}
             >
