@@ -1,96 +1,107 @@
 "use client"
 
 import { useState } from "react";
-import React from "react";
-import { TrendingUp, Clock3, CircleCheck, Send } from "lucide-react";
 
-const panduan = [
-    {
-        id: 1,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-        title: "Isi detail laporan"
-    },
-    {
-        id: 2,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-        title: "Tentukan lokasi"
-    },
-    {
-        id: 3,
-        icon: <CircleCheck size={18} className="text-green-500" />,
+const priorityConfig = {
+    Darurat: "bg-red-50 text-red-700 border-red-200 hover:bg-red-100",
+    Tinggi:  "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100",
+    Sedang:  "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100",
+    Rendah:  "bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100",
+};
 
-        title: "Verifikasi admin"
-    },
-    {
-        id: 4,
-        icon: <CircleCheck size={18} className="text-green-500" />,
+const priorityActive = {
+    Darurat: "bg-red-600 text-white border-red-600",
+    Tinggi:  "bg-amber-500 text-white border-amber-500",
+    Sedang:  "bg-blue-600 text-white border-blue-600",
+    Rendah:  "bg-gray-600 text-white border-gray-600",
+};
 
-        title: "Gunakan foto yang jelas dan fokus"
-    },
-    {
-        id: 5,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Tentukan lokasi dengan tepat"
-    },
-    {
-        id: 6,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Laporan akan ditindak lanjuti oleh pihak terkait"
-    }
+const estimasi = [
+    { label: "Verifikasi Admin", waktu: "± 1 hari", progress: 70 },
+    { label: "Diteruskan ke Instansi", waktu: "± 3 hari", progress: 45 },
+    { label: "Penyelesaian", waktu: "± 14 hari", progress: 20 },
 ];
 
-const kategori = [
-    {
-        title: "Jalan Rusak",
-        total: "128 laporan",
-    },
-    {
-        title: "Banjir",
-        total: "84 laporan",
-    },
-    {
-        title: "Lampu Mati",
-        total: "43 laporan",
-    },
-];
+function Section({ children }) {
+    return (
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-4">
+            {children}
+        </div>
+    );
+}
+
+function SectionHeader({ icon, title, subtitle }) {
+    return (
+        <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                <i className={`ti ${icon} text-sm text-emerald-600`} aria-hidden="true" />
+            </div>
+            <div>
+                <p className="text-[13px] font-semibold text-gray-900">{title}</p>
+                {subtitle && <p className="text-[11px] text-gray-400">{subtitle}</p>}
+            </div>
+        </div>
+    );
+}
+
+function Label({ children }) {
+    return (
+        <label className="block text-[12px] font-medium text-gray-600 mb-1.5">
+            {children}
+        </label>
+    );
+}
+
+const selectCls = "w-full h-10 px-3 text-sm bg-white border border-gray-200 rounded-xl text-gray-800 outline-none transition-all focus:border-emerald-400 focus:ring-2 focus:ring-emerald-50 appearance-none cursor-pointer";
 
 export default function ActionDetailLaporan() {
-
-    const [status, setStatus] = useState("Menunggu review");
+    const [status, setStatus] = useState("menunggu");
     const [priority, setPriority] = useState("");
     const [assignee, setAssignee] = useState("");
     const [note, setNote] = useState("");
 
     return (
         <div className="flex w-full flex-col gap-2">
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5 text-white">
-                <h2 className="text-sm font-semibold text-gray-300">AKSI ADMIN</h2>
+
+            {/* Aksi Admin */}
+            <Section>
+                <SectionHeader
+                    icon="ti-shield-check"
+                    title="Aksi Admin"
+                    subtitle="Kelola dan tindaklanjuti laporan ini"
+                />
+
+                <div className="h-px bg-gray-100" />
+
+                {/* Status */}
                 <div>
-                    <label className="text-xs text-gray-400">Status laporan</label>
-                    <select
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm"
-                    >
-                        <option>Menunggu review</option>
-                        <option>Diproses</option>
-                        <option>Selesai</option>
-                    </select>
+                    <Label>Status laporan</Label>
+                    <div className="relative">
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            className={selectCls}
+                        >
+                            <option value="menunggu">⏳ Menunggu Review</option>
+                            <option value="diproses">🔄 Diproses</option>
+                            <option value="selesai">✅ Selesai</option>
+                            <option value="ditolak">❌ Ditolak</option>
+                        </select>
+                        <i className="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true" />
+                    </div>
                 </div>
 
+                {/* Prioritas */}
                 <div>
-                    <label className="text-xs text-gray-400">Prioritas</label>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
+                    <Label>Tingkat prioritas</Label>
+                    <div className="grid grid-cols-2 gap-2">
                         {["Darurat", "Tinggi", "Sedang", "Rendah"].map((item) => (
                             <button
                                 key={item}
+                                type="button"
                                 onClick={() => setPriority(item)}
-                                className={`border rounded-md py-1 text-sm ${priority === item
-                                    ? "bg-blue-600 border-blue-600"
-                                    : "border-gray-500"
-                                    }`}
+                                className={`border rounded-xl py-2 text-[12px] font-medium transition-all cursor-pointer
+                                    ${priority === item ? priorityActive[item] : priorityConfig[item]}`}
                             >
                                 {item}
                             </button>
@@ -98,74 +109,105 @@ export default function ActionDetailLaporan() {
                     </div>
                 </div>
 
+                {/* Assign */}
                 <div>
-                    <label className="text-xs text-gray-400">Assign ke dinas/petugas</label>
-                    <select
-                        value={assignee}
-                        onChange={(e) => setAssignee(e.target.value)}
-                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm"
-                    >
-                        <option value="">— Pilih petugas —</option>
-                        <option value="petugas1">Petugas 1</option>
-                        <option value="petugas2">Petugas 2</option>
-                    </select>
+                    <Label>Assign ke dinas / petugas</Label>
+                    <div className="relative">
+                        <select
+                            value={assignee}
+                            onChange={(e) => setAssignee(e.target.value)}
+                            className={selectCls}
+                        >
+                            <option value="">— Pilih petugas —</option>
+                            <option value="petugas1">Dinas PU Wilayah 1</option>
+                            <option value="petugas2">Dinas PU Wilayah 2</option>
+                            <option value="petugas3">Satgas Kebersihan</option>
+                            <option value="petugas4">Dinas Lingkungan Hidup</option>
+                        </select>
+                        <i className="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true" />
+                    </div>
                 </div>
 
+                {/* Catatan */}
                 <div>
-                    <label className="text-xs text-gray-400">Catatan internal</label>
+                    <Label>Catatan internal</Label>
                     <textarea
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder="Catatan untuk tim internal (tidak terlihat warga)..."
-                        className="w-full mt-1 bg-[#2a2a2a] border border-gray-600 rounded-md p-2 text-sm h-20 resize-none"
+                        className="w-full px-3 py-2.5 text-sm bg-white border border-gray-200 rounded-xl text-gray-800 outline-none transition-all focus:border-emerald-400 focus:ring-2 focus:ring-emerald-50 placeholder:text-gray-400 resize-none h-20"
                     />
+                    <p className="text-[10px] text-gray-400 mt-1 flex items-center gap-1">
+                        <i className="ti ti-eye-off text-[11px]" aria-hidden="true" />
+                        Catatan ini hanya terlihat oleh admin
+                    </p>
                 </div>
-                <div className="mt-3 flex flex-col gap-2">
 
-                    <div className="flex gap-2 mt-auto">
-                        <button className="flex-1 border border-gray-500 rounded-md py-2 text-sm hover:bg-gray-700">
-                            ✕ Tolak
+                <div className="h-px bg-gray-100" />
+
+                {/* Action buttons */}
+                <div className="flex flex-col gap-2">
+                    <div className="flex gap-2">
+                        <button
+                            type="button"
+                            className="flex-1 flex items-center justify-center gap-1.5 border border-red-200 text-red-600 bg-red-50 rounded-xl py-2.5 text-[12px] font-medium hover:bg-red-100 transition-colors cursor-pointer"
+                        >
+                            <i className="ti ti-x text-sm" aria-hidden="true" />
+                            Tolak
                         </button>
-                        <button className="flex-1 bg-green-600 rounded-md py-2 text-sm hover:bg-green-700">
-                            ✔ Verifikasi
+                        <button
+                            type="button"
+                            className="flex-1 flex items-center justify-center gap-1.5 bg-emerald-600 text-white rounded-xl py-2.5 text-[12px] font-medium hover:bg-emerald-700 transition-colors cursor-pointer border-0"
+                        >
+                            <i className="ti ti-check text-sm" aria-hidden="true" />
+                            Verifikasi
                         </button>
                     </div>
-
-                    <button className="w-full border border-gray-500 rounded-md py-2 text-sm hover:bg-gray-700 flex items-center justify-center gap-2">
-                        <Send size={16} />
+                    <button
+                        type="button"
+                        className="w-full flex items-center justify-center gap-1.5 border border-gray-200 text-gray-600 bg-gray-50 rounded-xl py-2.5 text-[12px] font-medium hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                        <i className="ti ti-send text-sm" aria-hidden="true" />
                         Kirim notifikasi ke warga
                     </button>
                 </div>
-            </div>
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-4 flex items-center gap-2">
-                    <Clock3 size={16} className="text-[#DC9B9B]" />
+            </Section>
 
-                    <h2 className="text-sm font-bold text-white">
-                        Estimasi Proses
-                    </h2>
+            {/* Estimasi Proses */}
+            <Section>
+                <SectionHeader
+                    icon="ti-clock"
+                    title="Estimasi Proses"
+                    subtitle="Perkiraan waktu penanganan laporan"
+                />
+
+                <div className="h-px bg-gray-100" />
+
+                <div className="flex flex-col gap-3">
+                    {estimasi.map((e, i) => (
+                        <div key={i} className="flex flex-col gap-1.5">
+                            <div className="flex justify-between items-center">
+                                <span className="text-[11px] text-gray-500">{e.label}</span>
+                                <span className="text-[11px] font-medium text-gray-700">{e.waktu}</span>
+                            </div>
+                            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-emerald-500 rounded-full transition-all"
+                                    style={{ width: `${e.progress}%` }}
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                <div className="rounded-2xl bg-[#131313] p-4">
-                    <div className="flex items-center justify-between">
-                        <span className="text-xs text-[#8A8A8A]">
-                            Verifikasi Admin
-                        </span>
-
-                        <span className="text-xs font-medium text-white">
-                            ± 1 Hari
-                        </span>
-                    </div>
-
-                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#222]">
-                        <div className="h-full w-[70%] rounded-full bg-[#DC9B9B]" />
-                    </div>
-
-                    <p className="mt-3 text-[11px] leading-relaxed text-[#7A7A7A]">
-                        Laporan dengan detail lengkap biasanya lebih cepat diproses.
+                <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3">
+                    <p className="text-[11px] text-emerald-700 leading-relaxed">
+                        <i className="ti ti-info-circle mr-1" aria-hidden="true" />
+                        Laporan dengan foto dan detail lengkap biasanya diproses lebih cepat.
                     </p>
                 </div>
-            </div>
+            </Section>
+
         </div>
     );
 }

@@ -30,7 +30,7 @@ export default async function home() {
 
         const json = await res.json();
 
-        console.log("RAW JSON:", JSON.stringify(json)); // <-- tambahin ini
+        console.log("RAW JSON:", JSON.stringify(json));
         console.log("json.data:", json.data);
         
         reporting = json.data || []; 

@@ -1,242 +1,146 @@
 export default function DetailLaporanPending() {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
 
-            {/* HEADER DETAIL */}
-            <div className="overflow-hidden rounded-[24px] border border-[#232323] bg-[#161616]">
+            {/* HEADER */}
+            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
 
-                {/* IMAGE */}
-                <div className="relative h-[280px] w-full overflow-hidden">
+                {/* Image */}
+                <div className="relative h-[260px] w-full overflow-hidden">
                     <img
                         src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600&auto=format&fit=crop"
                         className="h-full w-full object-cover"
+                        alt="Foto laporan"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-black/20 to-transparent" />
-
-                    <div className="absolute left-6 top-6 flex items-center gap-2">
-                        <span className="rounded-full bg-[#DC9B9B] px-3 py-1 text-[11px] font-semibold text-white">
+                    {/* Badges */}
+                    <div className="absolute left-5 top-5 flex items-center gap-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-lg bg-amber-50 border border-amber-200 px-2.5 py-1 text-[11px] font-semibold text-amber-700">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                             Pending
                         </span>
-
-                        <span className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
+                        <span className="rounded-lg border border-white/20 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
                             Jalan Rusak
                         </span>
                     </div>
 
-                    <div className="absolute bottom-6 left-6 right-6">
-                        <h1 className="max-w-3xl text-3xl font-bold leading-tight text-white">
-                            Jalan rusak di daerah TB Simatupang
-                            menyebabkan kemacetan panjang
+                    {/* Title overlay */}
+                    <div className="absolute bottom-5 left-5 right-5">
+                        <h1 className="max-w-3xl text-2xl font-bold leading-tight text-white">
+                            Jalan rusak di daerah TB Simatupang menyebabkan kemacetan panjang
                         </h1>
-
-                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#B0B0B0]">
-                            Warga melaporkan kondisi jalan yang
-                            berlubang cukup parah dan membahayakan
-                            pengendara motor terutama saat malam hari.
+                        <p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-white/70">
+                            Warga melaporkan kondisi jalan yang berlubang cukup parah dan membahayakan pengendara motor terutama saat malam hari.
                         </p>
                     </div>
                 </div>
 
-                {/* INFO */}
-                <div className="grid grid-cols-2 gap-5 border-t border-[#232323] p-6 lg:grid-cols-4">
-
-                    <div className="rounded-2xl bg-[#111111] p-4">
-                        <p className="text-[11px] uppercase tracking-wide text-[#777]">
-                            Dilaporkan Oleh
-                        </p>
-
-                        <h2 className="mt-2 text-sm font-semibold text-white">
-                            Ramli Silawane
-                        </h2>
-                    </div>
-
-                    <div className="rounded-2xl bg-[#111111] p-4">
-                        <p className="text-[11px] uppercase tracking-wide text-[#777]">
-                            Tanggal
-                        </p>
-
-                        <h2 className="mt-2 text-sm font-semibold text-white">
-                            18 Mei 2026
-                        </h2>
-                    </div>
-
-                    <div className="rounded-2xl bg-[#111111] p-4">
-                        <p className="text-[11px] uppercase tracking-wide text-[#777]">
-                            Kecamatan
-                        </p>
-
-                        <h2 className="mt-2 text-sm font-semibold text-white">
-                            Harjamukti
-                        </h2>
-                    </div>
-
-                    <div className="rounded-2xl bg-[#111111] p-4">
-                        <p className="text-[11px] uppercase tracking-wide text-[#777]">
-                            Lokasi
-                        </p>
-
-                        <h2 className="mt-2 text-sm font-semibold text-white">
-                            Jakarta Timur
-                        </h2>
-                    </div>
+                {/* Info grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100 border-t border-gray-100">
+                    {[
+                        { icon: "ti-user", label: "Dilaporkan Oleh", value: "Ramli Silawane" },
+                        { icon: "ti-calendar", label: "Tanggal", value: "18 Mei 2026" },
+                        { icon: "ti-building", label: "Kecamatan", value: "Harjamukti" },
+                        { icon: "ti-map-pin", label: "Lokasi", value: "Jakarta Timur" },
+                    ].map((item) => (
+                        <div key={item.label} className="bg-white px-5 py-4">
+                            <p className="text-[10px] uppercase tracking-widest text-gray-400 flex items-center gap-1">
+                                <i className={`ti ${item.icon} text-[11px]`} aria-hidden="true" />
+                                {item.label}
+                            </p>
+                            <p className="mt-1.5 text-[13px] font-semibold text-gray-900">{item.value}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 
             {/* GALERI */}
-            <div className="rounded-[24px] border border-[#232323] bg-[#161616] p-6">
-
-                <div className="mb-5 flex items-center justify-between">
+            <div className="rounded-2xl border border-gray-200 bg-white p-5">
+                <div className="mb-4 flex items-center justify-between">
                     <div>
-                        <h2 className="text-lg font-semibold text-white">
-                            Dokumentasi Laporan
-                        </h2>
-
-                        <p className="mt-1 text-sm text-[#7A7A7A]">
-                            Foto pendukung dari warga pelapor
-                        </p>
+                        <h2 className="text-[14px] font-semibold text-gray-900">Dokumentasi Laporan</h2>
+                        <p className="mt-0.5 text-[12px] text-gray-400">Foto pendukung dari warga pelapor</p>
                     </div>
-
-                    <span className="rounded-full border border-[#2A2A2A] bg-[#111111] px-3 py-1 text-xs text-[#B0B0B0]">
+                    <span className="rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1 text-[11px] font-medium text-gray-500">
                         4 Foto
                     </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-
-                    <div className="group relative overflow-hidden rounded-2xl border border-[#2A2A2A]">
-                        <img
-                            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop"
-                            className="h-44 w-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-
-                        <div className="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/20" />
-                    </div>
-
-                    <div className="group relative overflow-hidden rounded-2xl border border-[#2A2A2A]">
-                        <img
-                            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
-                            className="h-44 w-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-
-                        <div className="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/20" />
-                    </div>
-
-                    <div className="group relative overflow-hidden rounded-2xl border border-[#2A2A2A]">
-                        <img
-                            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
-                            className="h-44 w-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-
-                        <div className="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/20" />
-                    </div>
-
-                    <div className="flex h-44 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#323232] bg-[#111111] transition hover:border-[#DC9B9B]">
-                        <svg
-                            className="mb-2 h-7 w-7 text-[#777]"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth={1.7}
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    {[
+                        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+                        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
+                        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+                    ].map((src, i) => (
+                        <div key={i} className="group relative overflow-hidden rounded-xl border border-gray-100 cursor-pointer">
+                            <img
+                                src={src}
+                                className="h-40 w-full object-cover transition duration-500 group-hover:scale-105"
+                                alt={`Dokumentasi ${i + 1}`}
                             />
-                        </svg>
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-center justify-center">
+                                <i className="ti ti-zoom-in text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                            </div>
+                            <div className="absolute bottom-2 left-2 bg-black/50 text-white text-[9px] px-1.5 py-0.5 rounded-md">
+                                Foto {i + 1}
+                            </div>
+                        </div>
+                    ))}
 
-                        <p className="text-xs text-[#8A8A8A]">
-                            Tambah Dokumentasi
-                        </p>
-                    </div>
+                    {/* Tambah foto */}
+                    <label className="flex h-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 transition-all hover:border-emerald-300 hover:bg-emerald-50">
+                        <input type="file" className="hidden" accept="image/*" multiple />
+                        <i className="ti ti-cloud-upload text-2xl text-gray-300 mb-1.5" aria-hidden="true" />
+                        <p className="text-[11px] font-medium text-gray-400">Tambah Foto</p>
+                        <p className="text-[10px] text-gray-300 mt-0.5">JPG, PNG</p>
+                    </label>
                 </div>
             </div>
 
             {/* MAP */}
-            <div className="rounded-[24px] border border-[#232323] bg-[#161616] p-6">
-
-                <div className="mb-5">
-                    <h2 className="text-lg font-semibold text-white">
-                        Lokasi Laporan
-                    </h2>
-
-                    <p className="mt-1 text-sm text-[#7A7A7A]">
-                        Titik lokasi laporan dari warga
-                    </p>
+            <div className="rounded-2xl border border-gray-200 bg-white p-5">
+                <div className="mb-4">
+                    <h2 className="text-[14px] font-semibold text-gray-900">Lokasi Laporan</h2>
+                    <p className="mt-0.5 text-[12px] text-gray-400">Titik lokasi laporan dari warga</p>
                 </div>
 
-                <div className="overflow-hidden rounded-3xl border border-[#262626]">
-
-                    <div className="relative flex h-[320px] items-center justify-center bg-[#101010]">
-
-                        <div className="absolute inset-0 opacity-[0.04]">
-                            <div className="h-full w-full bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
-                        </div>
-
-                        <div className="z-10 text-center">
-                            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#DC9B9B]">
-                                <svg
-                                    className="h-8 w-8 text-white"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth={1.8}
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                    />
-
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                </svg>
+                {/* Map placeholder */}
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-emerald-50 h-[280px] flex flex-col items-center justify-center gap-3 relative">
+                    {/* Grid pattern */}
+                    <div
+                        className="absolute inset-0 opacity-40"
+                        style={{
+                            backgroundImage: "linear-gradient(to right, #d1fae5 1px, transparent 1px), linear-gradient(to bottom, #d1fae5 1px, transparent 1px)",
+                            backgroundSize: "32px 32px",
+                        }}
+                    />
+                    {/* Pulse */}
+                    <div className="relative z-10 flex flex-col items-center gap-2">
+                        <div className="relative">
+                            <span className="absolute inset-0 rounded-full bg-emerald-400/30 animate-ping" />
+                            <div className="relative w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-200">
+                                <i className="ti ti-map-pin text-xl text-white" aria-hidden="true" />
                             </div>
-
-                            <p className="text-sm text-[#A0A0A0]">
-                                Preview lokasi laporan
-                            </p>
                         </div>
+                        <p className="text-[12px] font-medium text-emerald-700">Preview lokasi laporan</p>
+                        <p className="text-[11px] text-emerald-500">Klik untuk buka peta penuh</p>
                     </div>
                 </div>
 
-                <div className="mt-4 flex items-start gap-3 rounded-2xl bg-[#111111] p-4">
-                    <svg
-                        className="mt-0.5 h-5 w-5 shrink-0 text-[#DC9B9B]"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={1.8}
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                    </svg>
-
+                <div className="mt-3 flex items-start gap-3 rounded-xl bg-gray-50 border border-gray-100 p-4">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <i className="ti ti-map-pin text-sm text-emerald-600" aria-hidden="true" />
+                    </div>
                     <div>
-                        <p className="text-[11px] uppercase tracking-wide text-[#666]">
-                            Alamat Lengkap
+                        <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Alamat Lengkap</p>
+                        <p className="text-[13px] font-medium text-gray-800 leading-relaxed">
+                            Jl. Harjamukti, Kec. Kebayoran Lama, Jakarta Timur
                         </p>
-
-                        <h2 className="mt-1 text-sm font-medium leading-relaxed text-white">
-                            Jl. Harjamukti, Kec. Kebayoran Lama,
-                            Jakarta Timur
-                        </h2>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
