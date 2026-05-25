@@ -36,8 +36,8 @@ export default function MapView() {
         <MapContainer
             center={[-6.2088, 106.8456]}
             zoom={12}
-            className="w-full h-full"
-            scrollWheelZoom={true}
+            style={{ width: "100%", height: "100%" }}  // ← ini yang penting
+            scrollWheelZoom={false}
         >
             {/* Tile layer — OpenStreetMap gratis tanpa API key */}
             <TileLayer

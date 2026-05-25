@@ -51,13 +51,12 @@ export const libraryNav = [
                     </svg>
     ),
   }
-
 ];
 
 export const menuNav = [
     {
     label: "Profile",
-    href: "/profile",
+    href: "/client/profile",
     icon: (
        <svg xmlns="http://www.w3.org/2000/svg"
                         fill="none"

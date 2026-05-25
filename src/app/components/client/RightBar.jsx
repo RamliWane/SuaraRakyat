@@ -1,4 +1,8 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
+
 
 const reports = [
     {
@@ -74,6 +78,18 @@ function Divider() {
     return <div className="h-px bg-gray-100" />;
 }
 
+const MapView = dynamic(() => import("../../components/client/MapView"), {
+    ssr: false,
+    loading: () => (
+        <div className="w-full h-full bg-emerald-50 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+                <i className="ti ti-loader-2 animate-spin text-2xl text-emerald-500" />
+                <p className="text-sm text-gray-400">Memuat peta...</p>
+            </div>
+        </div>
+    ),
+});
+
 export default function RightBar() {
     return (
         <div className="w-[252px] flex flex-col gap-2 bg-gray-50 border-l border-gray-200 p-3 min-h-screen shrink-0">
@@ -135,36 +151,8 @@ export default function RightBar() {
             <Section>
                 <SectionHeader icon="ti-map" title="Peta laporan" linkLabel="Buka penuh" />
 
-                <div className="bg-emerald-50 border border-emerald-100 rounded-xl h-[80px] flex flex-col items-center justify-center gap-1.5 cursor-pointer hover:bg-emerald-100 transition-colors relative overflow-hidden">
-                    {[
-                        { top: "28%", left: "30%", delay: "0s" },
-                        { top: "50%", left: "58%", delay: "0.7s" },
-                        { top: "18%", left: "68%", delay: "1.4s" },
-                    ].map((dot, i) => (
-                        <React.Fragment key={i}>
-                            <span
-                                className="absolute w-3.5 h-3.5 rounded-full bg-emerald-400/30 animate-ping"
-                                style={{ top: dot.top, left: dot.left, animationDelay: dot.delay }}
-                            />
-                            <span
-                                className="absolute w-1.5 h-1.5 rounded-full bg-emerald-500 border-2 border-white"
-                                style={{ top: `calc(${dot.top} + 4px)`, left: `calc(${dot.left} + 4px)` }}
-                            />
-                        </React.Fragment>
-                    ))}
-                    <i className="ti ti-map-2 text-xl text-emerald-300 relative z-10" aria-hidden="true" />
-                    <span className="text-[10px] text-gray-400 relative z-10">Lihat peta interaktif</span>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-gray-50 border border-gray-100 rounded-xl p-2.5">
-                        <p className="text-[17px] font-bold text-gray-800">24</p>
-                        <p className="text-[9px] text-gray-400 mt-0.5">Laporan aktif</p>
-                    </div>
-                    <div className="bg-gray-50 border border-gray-100 rounded-xl p-2.5">
-                        <p className="text-[17px] font-bold text-gray-800">3</p>
-                        <p className="text-[9px] text-gray-400 mt-0.5">Dalam prosesmu</p>
-                    </div>
+                <div className="rounded-xl overflow-hidden" style={{ height: "160px" }}>
+                    <MapView />
                 </div>
             </Section>
         </div>
