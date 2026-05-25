@@ -76,7 +76,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                         key={id}
                         className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-emerald-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
-                        {/* Image */}
                         <div className="relative h-[120px] bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
                             {image && image !== "no-image.jpg" ? (
                                 <img
@@ -94,10 +93,8 @@ export default function LaporanCard({ dataLaporan, token }) {
                             )}
                         </div>
 
-                        {/* Body */}
                         <div className="flex flex-col gap-2.5 p-3.5 flex-1">
 
-                            {/* Badges */}
                             <div className="flex gap-1.5 flex-wrap">
                                 {statusCfg && (
                                     <span className={`inline-flex items-center gap-1.5 text-[10px] font-medium px-2 py-0.5 rounded-md border ${statusCfg.cls}`}>
@@ -112,7 +109,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                                 )}
                             </div>
 
-                            {/* Title + desc */}
                             <div className="flex-1">
                                 <h3 className="text-[13px] font-semibold text-gray-900 leading-snug mb-1 line-clamp-2">
                                     {judul || "Tanpa Judul"}
@@ -122,7 +118,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                                 </p>
                             </div>
 
-                            {/* Footer */}
                             <div className="flex items-center justify-between pt-2.5 border-t border-gray-100 mt-auto">
                                 <div className="flex items-center gap-2 min-w-0">
                                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${avatarColor}`}>

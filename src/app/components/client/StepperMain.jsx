@@ -16,15 +16,15 @@ export default function StepperMain() {
             {/* STEP 1 */}
             <Step>
                 <div>
-                    <span className="text-sm font-medium text-[#DC9B9B]">
+                    <span className="text-sm font-medium text-black">
                         Langkah 1
                     </span>
 
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2 className="text-2xl font-bold text-black">
                         Pilih Kategori Laporan
                     </h2>
 
-                    <p className="text-sm leading-relaxed text-gray-300">
+                    <p className="text-sm leading-relaxed text-black">
                         Pilih kategori yang sesuai dengan
                         permasalahan yang ingin dilaporkan seperti
                         jalan rusak, sampah, banjir, atau lampu
@@ -33,10 +33,9 @@ export default function StepperMain() {
                 </div>
             </Step>
 
-            {/* STEP 2 */}
             <Step>
                 <div className="space-y-3">
-                    <span className="text-sm font-medium text-[#DC9B9B]">
+                    <span className="text-sm font-medium text-black">
                         Langkah 2
                     </span>
 
@@ -52,10 +51,9 @@ export default function StepperMain() {
                 </div>
             </Step>
 
-            {/* STEP 3 */}
             <Step>
                 <div className="space-y-3">
-                    <span className="text-sm font-medium text-[#DC9B9B]">
+                    <span className="text-sm font-medium text-black">
                         Langkah 3
                     </span>
 
@@ -71,7 +69,6 @@ export default function StepperMain() {
                 </div>
             </Step>
 
-            {/* STEP 4 */}
             <Step>
                 <div className="flex flex-col items-center justify-center mt-2 text-center">
                     <h2 className="text-2xl font-bold text-white">

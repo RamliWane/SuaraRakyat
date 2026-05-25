@@ -73,8 +73,8 @@ export default function Stepper({
           max-w-5xl
           rounded-[10px]
           border
-          border-[#1B1B1B]
-          bg-[#1C1A18]
+          border-gray-200
+          bg-white
           text-white
           shadow-[0_0_0_1px_rgba(255,255,255,0.02)]
           ${stepCircleContainerClassName}
@@ -177,12 +177,12 @@ export default function Stepper({
                   className="
                     rounded-full
                     border
-                    border-[#242424]
-                    bg-[#151515]
+                    border-gray-200
+                    bg-gray-200
                     px-4
                     py-2
                     text-sm
-                    text-[#A1A1A1]
+                    text-black
                     transition-all
                     duration-300
                     hover:border-[#2A2A2A]
@@ -201,7 +201,7 @@ export default function Stepper({
                 }
                 className="
                   rounded-full
-                  bg-[#DC9B9B]
+                  bg-[#A2CB8B]
                   px-5
                   py-2
                   text-sm
@@ -209,7 +209,7 @@ export default function Stepper({
                   text-white
                   transition-all
                   duration-300
-                  hover:bg-[#DC9B9B]/80
+                  hover:bg-[#a2cb8b]/80
                   active:scale-[0.98]
                 "
                 {...nextButtonProps}
@@ -364,17 +364,17 @@ function StepIndicator({
       <motion.div
         variants={{
           inactive: {
-            backgroundColor: "#1A1A1A",
+            backgroundColor: "#ababab",
             color: "#ffffff",
           },
 
           active: {
-            backgroundColor: "#DC9B9B",
+            backgroundColor: "#A2CB8B",
             color: "#ffffff",
           },
 
           complete: {
-            backgroundColor: "#DC9B9B",
+            backgroundColor: "#A2CB8B",
             color: "#ffffff",
           },
         }}
@@ -389,7 +389,7 @@ function StepIndicator({
           justify-center
           rounded-full
           border
-          border-[#242424]
+          border-gray-200
           text-xs
           font-semibold
         "
@@ -408,12 +408,12 @@ function StepIndicator({
 
 function StepConnector({ isComplete }) {
   return (
-    <div className="relative mx-1 h-[1px] flex-1 overflow-hidden rounded bg-[#222222]">
+    <div className="relative mx-1 h-[1px] flex-1 overflow-hidden rounded bg-gray-300">
       <motion.div
         initial={false}
         animate={{
           width: isComplete ? "100%" : "0%",
-          backgroundColor: "#DC9B9B",
+          backgroundColor: "#A2CB8B",
         }}
         transition={{
           duration: 0.35,

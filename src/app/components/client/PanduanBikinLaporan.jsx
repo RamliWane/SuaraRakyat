@@ -1,161 +1,120 @@
 "use client";
 
 import React from "react";
-import {
-    TrendingUp,
-    Clock3,
-    MessageCircleCheck,
-    CircleCheck,
-} from "lucide-react";
 
 const panduan = [
-    {
-        id: 1,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-        title: "Isi detail laporan"
-    },
-    {
-        id: 2,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-        title: "Tentukan lokasi"
-    },
-    {
-        id: 3,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Verifikasi admin"
-    },
-    {
-        id: 4,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Gunakan foto yang jelas dan fokus"
-    },
-    {
-        id: 5,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Tentukan lokasi dengan tepat"
-    },
-    {
-        id: 6,
-        icon: <CircleCheck size={18} className="text-green-500" />,
-
-        title: "Laporan akan ditindak lanjuti oleh pihak terkait"
-    }
+    { id: 1, title: "Isi detail laporan dengan lengkap" },
+    { id: 2, title: "Tentukan lokasi dengan tepat" },
+    { id: 3, title: "Gunakan foto yang jelas dan fokus" },
+    { id: 4, title: "Tunggu verifikasi dari admin" },
+    { id: 5, title: "Laporan diteruskan ke instansi terkait" },
+    { id: 6, title: "Pantau progres lewat notifikasi" },
 ];
 
 const kategori = [
-    {
-        title: "Jalan Rusak",
-        total: "128 laporan",
-    },
-    {
-        title: "Banjir",
-        total: "84 laporan",
-    },
-    {
-        title: "Lampu Mati",
-        total: "43 laporan",
-    },
+    { id: 1, title: "Jalan Rusak", total: "128 laporan" },
+    { id: 2, title: "Banjir", total: "84 laporan" },
+    { id: 3, title: "Lampu Mati", total: "43 laporan" },
 ];
+
+const estimasi = [
+    { label: "Verifikasi Admin", waktu: "± 1 hari", progress: 70 },
+    { label: "Diteruskan ke Instansi", waktu: "± 3 hari", progress: 45 },
+    { label: "Penyelesaian", waktu: "± 14 hari", progress: 20 },
+];
+
+function Section({ children }) {
+    return (
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col gap-3">
+            {children}
+        </div>
+    );
+}
+
+function SectionHeader({ icon, title, linkLabel }) {
+    return (
+        <div className="flex justify-between items-center">
+            <span className="text-[12px] font-semibold text-gray-800 flex items-center gap-1.5">
+                <i className={`ti ${icon} text-[13px] text-gray-400`} aria-hidden="true" />
+                {title}
+            </span>
+            {linkLabel && (
+                <span className="text-[10px] text-gray-400 cursor-pointer flex items-center gap-0.5 hover:text-gray-600 transition-colors">
+                    {linkLabel}
+                    <i className="ti ti-arrow-right text-[10px]" aria-hidden="true" />
+                </span>
+            )}
+        </div>
+    );
+}
+
+function Divider() {
+    return <div className="h-px bg-gray-100" />;
+}
 
 export default function PanduanBikinLaporan() {
     return (
-        <div className="flex w-full flex-col gap-2">
+        <div className="w-[252px] flex flex-col gap-2 bg-gray-50 border-l border-gray-200 p-2 min-h-screen shrink-0">
 
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-5">
-                    <h2 className="text-sm font-bold text-white">
-                        Panduan Membuat Laporan
-                    </h2>
+            <Section>
+                <SectionHeader icon="ti-list-check" title="Panduan laporan" />
 
-                    <p className="mt-1 text-xs leading-relaxed text-[#7A7A7A]">
-                        Ikuti langkah berikut agar laporan cepat diproses.
-                    </p>
-                </div>
-
-                <div className="flex flex-col gap-4">
-                    {panduan.map((item) => (
-                        <div
-                            key={item.id}
-                            className="flex gap-3 "
-                        >
-                            <div className="flex gap-3">
-                                <div className="w-4 h-4">
-                                    {item.icon}
-                                </div>
-                                <span className="text-[12px] font-medium text-white">
-                                    {item.title}
-                                </span>
+                {panduan.map((r, i) => (
+                    <React.Fragment key={r.id}>
+                        {i > 0 && <Divider />}
+                        <div className="flex gap-2.5 items-center">
+                            <div className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center flex-shrink-0">
+                                <i className="ti ti-check text-[10px] text-emerald-600" aria-hidden="true" />
                             </div>
+                            <span className="text-[11px] font-medium text-gray-700 leading-snug">{r.title}</span>
                         </div>
-                    ))}
-                </div>
-            </div>
+                    </React.Fragment>
+                ))}
+            </Section>
 
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-sm font-bold text-white">
-                        Kategori Populer
-                    </h2>
+            <Section>
+                <SectionHeader icon="ti-trending-up" title="Kategori terpopuler" />
 
-                    <TrendingUp size={16} className="text-[#DC9B9B]" />
-                </div>
+                {kategori.map((t, i) => (
+                    <React.Fragment key={t.id}>
+                        {i > 0 && <Divider />}
+                        <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                                <span className="text-[16px] font-bold text-gray-200 w-4 text-center shrink-0">{i + 1}</span>
+                                <p className="text-[11px] font-medium text-gray-800 truncate">{t.title}</p>
+                            </div>
+                            <span className="text-[10px] text-gray-400 shrink-0">{t.total}</span>
+                        </div>
+                    </React.Fragment>
+                ))}
+            </Section>
 
+            <Section>
+                <SectionHeader icon="ti-clock" title="Estimasi proses" />
                 <div className="flex flex-col gap-3">
-                    {kategori.map((item, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center gap-3 rounded-2xl bg-[#131313] p-3"
-                        >
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#222222]">
-                                {item.icon}
+                    {estimasi.map((e, i) => (
+                        <div key={i} className="flex flex-col gap-1.5">
+                            <div className="flex justify-between items-center">
+                                <span className="text-[10px] text-gray-500">{e.label}</span>
+                                <span className="text-[10px] font-medium text-gray-700">{e.waktu}</span>
                             </div>
-
-                            <div className="flex flex-col">
-                                <span className="text-sm font-medium text-white">
-                                    {item.title}
-                                </span>
-
-                                <span className="text-[11px] text-[#7A7A7A]">
-                                    {item.total}
-                                </span>
+                            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-emerald-500 rounded-full"
+                                    style={{ width: `${e.progress}%` }}
+                                />
                             </div>
                         </div>
                     ))}
                 </div>
-            </div>
 
-            <div className="rounded-[10px] border border-[#232323] bg-[#181818] p-5">
-                <div className="mb-4 flex items-center gap-2">
-                    <Clock3 size={16} className="text-[#DC9B9B]" />
-
-                    <h2 className="text-sm font-bold text-white">
-                        Estimasi Proses
-                    </h2>
-                </div>
-
-                <div className="rounded-2xl bg-[#131313] p-4">
-                    <div className="flex items-center justify-between">
-                        <span className="text-xs text-[#8A8A8A]">
-                            Verifikasi Admin
-                        </span>
-
-                        <span className="text-xs font-medium text-white">
-                            ± 1 Hari
-                        </span>
-                    </div>
-
-                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#222]">
-                        <div className="h-full w-[70%] rounded-full bg-[#DC9B9B]" />
-                    </div>
-
-                    <p className="mt-3 text-[11px] leading-relaxed text-[#7A7A7A]">
-                        Laporan dengan detail lengkap biasanya lebih cepat diproses.
+                <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3 mt-1">
+                    <p className="text-[10px] text-emerald-700 leading-relaxed">
+                        <i className="ti ti-info-circle mr-1" aria-hidden="true" />
+                        Laporan dengan foto dan detail lengkap biasanya diproses lebih cepat.
                     </p>
                 </div>
-            </div>
+            </Section>
         </div>
     );
 }

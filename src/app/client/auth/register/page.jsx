@@ -82,8 +82,8 @@ export default function Register() {
                 </div>
 
                 <h1 className="font-medium text-gray-900 text-4xl md:text-5xl mb-3">
-                    Daftar &<br />
-                    <span className="text-emerald-600">Mulai Sekarang</span>
+                    Daftar &
+                    <span className="text-emerald-600"> Mulai Sekarang</span>
                 </h1>
 
                 <p className="text-gray-500 text-sm font-medium mb-10">

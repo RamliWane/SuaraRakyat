@@ -109,7 +109,6 @@ export default function RightBar() {
                 })}
             </Section>
 
-            {/* Trending */}
             <Section>
                 <SectionHeader icon="ti-trending-up" title="Trending minggu ini" />
 
@@ -133,7 +132,6 @@ export default function RightBar() {
                 ))}
             </Section>
 
-            {/* Peta */}
             <Section>
                 <SectionHeader icon="ti-map" title="Peta laporan" linkLabel="Buka penuh" />
 
@@ -169,7 +167,6 @@ export default function RightBar() {
                     </div>
                 </div>
             </Section>
-
         </div>
     );
 }
