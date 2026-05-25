@@ -1,8 +1,13 @@
+import { cookies } from "next/headers";
 import SidebarAdmin from '../../components/admin/SideBarAdmin';
 import NavbarHome from '../../components/client/NavbarHome';
 import ReportPending from "../../components/admin/ReportPending";
 
 export default async function KatalogClone() {
+
+    const cookieStore = await cookies();
+    const token = cookieStore.get("session_token")?.value ?? "";
+
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black">
             <NavbarHome />
@@ -16,7 +21,7 @@ export default async function KatalogClone() {
                         </p>
                     </div>
                     <hr className="border-t border-black" />
-                    <ReportPending />
+                    <ReportPending token={token}/>
                 </div>
             </div>
         </div>

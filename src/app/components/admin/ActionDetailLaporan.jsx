@@ -63,7 +63,6 @@ export default function ActionDetailLaporan() {
     return (
         <div className="flex w-full flex-col gap-2">
 
-            {/* Aksi Admin */}
             <Section>
                 <SectionHeader
                     icon="ti-shield-check"
@@ -73,7 +72,6 @@ export default function ActionDetailLaporan() {
 
                 <div className="h-px bg-gray-100" />
 
-                {/* Status */}
                 <div>
                     <Label>Status laporan</Label>
                     <div className="relative">
@@ -82,10 +80,10 @@ export default function ActionDetailLaporan() {
                             onChange={(e) => setStatus(e.target.value)}
                             className={selectCls}
                         >
-                            <option value="menunggu">⏳ Menunggu Review</option>
-                            <option value="diproses">🔄 Diproses</option>
-                            <option value="selesai">✅ Selesai</option>
-                            <option value="ditolak">❌ Ditolak</option>
+                            <option value="menunggu">Pending</option>
+                            <option value="diproses">Diproses</option>
+                            <option value="selesai">Selesai</option>
+                            <option value="ditolak">Ditolak</option>
                         </select>
                         <i className="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true" />
                     </div>
@@ -109,43 +107,22 @@ export default function ActionDetailLaporan() {
                     </div>
                 </div>
 
-                {/* Assign */}
                 <div>
-                    <Label>Assign ke dinas / petugas</Label>
-                    <div className="relative">
-                        <select
-                            value={assignee}
-                            onChange={(e) => setAssignee(e.target.value)}
-                            className={selectCls}
-                        >
-                            <option value="">— Pilih petugas —</option>
-                            <option value="petugas1">Dinas PU Wilayah 1</option>
-                            <option value="petugas2">Dinas PU Wilayah 2</option>
-                            <option value="petugas3">Satgas Kebersihan</option>
-                            <option value="petugas4">Dinas Lingkungan Hidup</option>
-                        </select>
-                        <i className="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true" />
-                    </div>
-                </div>
-
-                {/* Catatan */}
-                <div>
-                    <Label>Catatan internal</Label>
+                    <Label>Catatan</Label>
                     <textarea
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
-                        placeholder="Catatan untuk tim internal (tidak terlihat warga)..."
+                        placeholder="Berikan Catatan"
                         className="w-full px-3 py-2.5 text-sm bg-white border border-gray-200 rounded-xl text-gray-800 outline-none transition-all focus:border-emerald-400 focus:ring-2 focus:ring-emerald-50 placeholder:text-gray-400 resize-none h-20"
                     />
                     <p className="text-[10px] text-gray-400 mt-1 flex items-center gap-1">
                         <i className="ti ti-eye-off text-[11px]" aria-hidden="true" />
-                        Catatan ini hanya terlihat oleh admin
+                        Catatan Untuk Para Pelapor
                     </p>
                 </div>
 
                 <div className="h-px bg-gray-100" />
 
-                {/* Action buttons */}
                 <div className="flex flex-col gap-2">
                     <div className="flex gap-2">
                         <button

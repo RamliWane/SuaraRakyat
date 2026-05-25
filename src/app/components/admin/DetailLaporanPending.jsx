@@ -1,61 +1,85 @@
-export default function DetailLaporanPending() {
+const statusConfig = {
+    pending:  { label: "Pending",  cls: "bg-amber-50 border-amber-200 text-amber-700",   dot: "bg-amber-500" },
+    diproses: { label: "Diproses", cls: "bg-blue-50 border-blue-200 text-blue-700",     dot: "bg-blue-500" },
+    selesai:  { label: "Selesai",  cls: "bg-emerald-50 border-emerald-200 text-emerald-700", dot: "bg-emerald-500" },
+    ditolak:  { label: "Ditolak",  cls: "bg-red-50 border-red-200 text-red-700",         dot: "bg-red-500" },
+};
+
+export default function DetailLaporanPending({ data }) {
+    if (!data) return (
+        <div className="bg-white rounded-2xl border border-gray-200 p-16 flex items-center justify-center">
+            <p className="text-sm text-gray-400">Data tidak tersedia.</p>
+        </div>
+    );
+
+    const statusCfg = statusConfig[data.status?.toLowerCase()] ?? statusConfig.pending;
+
+    const infoGrid = [
+        { icon: "ti-user",     label: "Dilaporkan Oleh", value: data.username ?? "-" },
+        { icon: "ti-calendar", label: "Tanggal",          value: data.created_at ? new Date(data.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-" },
+        { icon: "ti-layout-grid", label: "Kategori",      value: data.category_name ?? "-" },
+        { icon: "ti-map-pin",  label: "Lokasi",           value: data.lokasi ?? "-" },
+    ];
+
     return (
         <div className="flex flex-col gap-3">
 
-            {/* HEADER */}
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
-
-                {/* Image */}
                 <div className="relative h-[260px] w-full overflow-hidden">
-                    <img
-                        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600&auto=format&fit=crop"
-                        className="h-full w-full object-cover"
-                        alt="Foto laporan"
-                    />
+                    {data.image && data.image !== "no-image.jpg" ? (
+                        <img
+                            src={data.image}
+                            className="h-full w-full object-cover"
+                            alt="Foto laporan"
+                        />
+                    ) : (
+                        <div className="h-full w-full bg-gray-100 flex flex-col items-center justify-center gap-2">
+                            <i className="ti ti-photo-off text-4xl text-gray-300" aria-hidden="true" />
+                            <p className="text-xs text-gray-400">Tidak ada foto</p>
+                        </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                    {/* Badges */}
                     <div className="absolute left-5 top-5 flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-lg bg-amber-50 border border-amber-200 px-2.5 py-1 text-[11px] font-semibold text-amber-700">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                            Pending
+                        <span className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-medium ${statusCfg.cls}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${statusCfg.dot}`} />
+                            {statusCfg.label}
                         </span>
-                        <span className="rounded-lg border border-white/20 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
-                            Jalan Rusak
-                        </span>
+                        {data.category_name && (
+                            <span className="rounded-lg border border-white/20 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+                                {data.category_name}
+                            </span>
+                        )}
+                        {data.urgensi && (
+                            <span className="rounded-lg border border-white/20 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm capitalize">
+                               Urgensi : {data.urgensi}
+                            </span>
+                        )}
                     </div>
 
-                    {/* Title overlay */}
                     <div className="absolute bottom-5 left-5 right-5">
                         <h1 className="max-w-3xl text-2xl font-bold leading-tight text-white">
-                            Jalan rusak di daerah TB Simatupang menyebabkan kemacetan panjang
+                            {data.judul ?? "Tanpa Judul"}
                         </h1>
                         <p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-white/70">
-                            Warga melaporkan kondisi jalan yang berlubang cukup parah dan membahayakan pengendara motor terutama saat malam hari.
+                            {data.deskripsi}
                         </p>
                     </div>
                 </div>
 
-                {/* Info grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100 border-t border-gray-100">
-                    {[
-                        { icon: "ti-user", label: "Dilaporkan Oleh", value: "Ramli Silawane" },
-                        { icon: "ti-calendar", label: "Tanggal", value: "18 Mei 2026" },
-                        { icon: "ti-building", label: "Kecamatan", value: "Harjamukti" },
-                        { icon: "ti-map-pin", label: "Lokasi", value: "Jakarta Timur" },
-                    ].map((item) => (
+                    {infoGrid.map((item) => (
                         <div key={item.label} className="bg-white px-5 py-4">
                             <p className="text-[10px] uppercase tracking-widest text-gray-400 flex items-center gap-1">
                                 <i className={`ti ${item.icon} text-[11px]`} aria-hidden="true" />
                                 {item.label}
                             </p>
-                            <p className="mt-1.5 text-[13px] font-semibold text-gray-900">{item.value}</p>
+                            <p className="mt-1.5 text-[13px] font-medium text-gray-900">{item.value}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* GALERI */}
             <div className="rounded-2xl border border-gray-200 bg-white p-5">
                 <div className="mb-4 flex items-center justify-between">
                     <div>
@@ -63,32 +87,27 @@ export default function DetailLaporanPending() {
                         <p className="mt-0.5 text-[12px] text-gray-400">Foto pendukung dari warga pelapor</p>
                     </div>
                     <span className="rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1 text-[11px] font-medium text-gray-500">
-                        4 Foto
+                        {data.image && data.image !== "no-image.jpg" ? "1 Foto" : "Belum ada foto"}
                     </span>
                 </div>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                    {[
-                        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
-                        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-                        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
-                    ].map((src, i) => (
-                        <div key={i} className="group relative overflow-hidden rounded-xl border border-gray-100 cursor-pointer">
+                    {data.image && data.image !== "no-image.jpg" && (
+                        <div className="group relative overflow-hidden rounded-xl border border-gray-100 cursor-pointer">
                             <img
-                                src={src}
+                                src={data.image}
                                 className="h-40 w-full object-cover transition duration-500 group-hover:scale-105"
-                                alt={`Dokumentasi ${i + 1}`}
+                                alt="Dokumentasi 1"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-center justify-center">
                                 <i className="ti ti-zoom-in text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
                             </div>
                             <div className="absolute bottom-2 left-2 bg-black/50 text-white text-[9px] px-1.5 py-0.5 rounded-md">
-                                Foto {i + 1}
+                                Foto 1
                             </div>
                         </div>
-                    ))}
+                    )}
 
-                    {/* Tambah foto */}
                     <label className="flex h-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 transition-all hover:border-emerald-300 hover:bg-emerald-50">
                         <input type="file" className="hidden" accept="image/*" multiple />
                         <i className="ti ti-cloud-upload text-2xl text-gray-300 mb-1.5" aria-hidden="true" />
@@ -98,16 +117,14 @@ export default function DetailLaporanPending() {
                 </div>
             </div>
 
-            {/* MAP */}
+            {/* Map */}
             <div className="rounded-2xl border border-gray-200 bg-white p-5">
                 <div className="mb-4">
                     <h2 className="text-[14px] font-semibold text-gray-900">Lokasi Laporan</h2>
                     <p className="mt-0.5 text-[12px] text-gray-400">Titik lokasi laporan dari warga</p>
                 </div>
 
-                {/* Map placeholder */}
                 <div className="overflow-hidden rounded-xl border border-gray-200 bg-emerald-50 h-[280px] flex flex-col items-center justify-center gap-3 relative">
-                    {/* Grid pattern */}
                     <div
                         className="absolute inset-0 opacity-40"
                         style={{
@@ -115,7 +132,6 @@ export default function DetailLaporanPending() {
                             backgroundSize: "32px 32px",
                         }}
                     />
-                    {/* Pulse */}
                     <div className="relative z-10 flex flex-col items-center gap-2">
                         <div className="relative">
                             <span className="absolute inset-0 rounded-full bg-emerald-400/30 animate-ping" />
@@ -135,12 +151,11 @@ export default function DetailLaporanPending() {
                     <div>
                         <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Alamat Lengkap</p>
                         <p className="text-[13px] font-medium text-gray-800 leading-relaxed">
-                            Jl. Harjamukti, Kec. Kebayoran Lama, Jakarta Timur
+                            {data.lokasi ?? "Lokasi tidak tersedia"}
                         </p>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

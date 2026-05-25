@@ -1,6 +1,6 @@
 'use client'
 
-import { loginAction } from '../../../../lib/auth';
+import { loginAction } from '../../../../lib/api/auth';
 import React, { useState } from 'react';
 
 export default function Login() {

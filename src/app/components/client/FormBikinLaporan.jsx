@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import tambahLaporan from "../../../lib/tambahlaporan";
+import tambahLaporan from "../../../lib/api/laporan";
 import Toast, { showToast } from "../../components/client/Toast";
 
 export default function FormBikinLaporan() {
