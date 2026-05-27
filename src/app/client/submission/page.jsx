@@ -1,10 +1,16 @@
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
-import RightBar from "../../components/client/RightBar";
 import FilterCategory from "../../components/client/FilterCategory";
-import LaporanCard from "../../components/client/LaporanCard";
+import { getAllLaporanSaya } from "../../../lib/api/laporan";
+import LaporanSaya from "../../components/client/LaporanSaya";
 
-export default function Submission() {
+export default async function Submission() {
+    let data = [];
+    try {
+        data = await getAllLaporanSaya();
+    } catch (err) {
+        console.error(err.message);
+    }
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black">
             <NavbarHome />
@@ -22,9 +28,7 @@ export default function Submission() {
                         </div>
                     </header>
 
-                    <main className="flex flex-col m-5">
-                        <LaporanCard />
-                    </main>
+                    <LaporanSaya data={data} />
                 </div>
             </div>
         </div>

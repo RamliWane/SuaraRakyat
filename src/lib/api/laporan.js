@@ -58,9 +58,12 @@ export async function getLaporanPending(token) {
     if (!res.ok) throw new Error("Gagal mengambil laporan pending");
     const json = await res.json();
     return json.data;
-}
+}   
 
-export async function getAllLaporan(token) {
+export async function getAllLaporan() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("session_token")?.value;
+
     const res = await fetch(`${BASE_URL}/reporting`, {
         headers: getAuthHeaders(token),
         cache: "no-store",
@@ -76,6 +79,19 @@ export async function getLaporanById(id, token) {
         cache: "no-store",
     });
     if (!res.ok) throw new Error("Laporan tidak ditemukan");
+    const json = await res.json();
+    return json.data;
+}
+
+export async function getAllLaporanSaya() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("session_token")?.value;
+
+    const res = await fetch(`${BASE_URL}/reporting/user/me`, {
+        headers: getAuthHeaders(token),
+        cache: "no-store",
+    });
+    if (!res.ok) throw new Error("Gagal mengambil laporan");
     const json = await res.json();
     return json.data;
 }
