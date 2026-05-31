@@ -2,6 +2,8 @@
 
 import CommentButton from "./CommentButton";
 import LikeButton from "./LikeButton";
+import { useRouter } from "next/navigation";
+
 
 const statusConfig = {
     proses: {
@@ -40,6 +42,7 @@ function getAvatar(username = "") {
 }
 
 export default function LaporanCard({ dataLaporan, token }) {
+    const router = useRouter();
     if (!Array.isArray(dataLaporan)) {
         return (
             <div className="flex flex-col items-center justify-center py-16 text-center gap-3">
@@ -74,6 +77,7 @@ export default function LaporanCard({ dataLaporan, token }) {
                 return (
                     <div
                         key={id}
+                        onClick={() => router.push(`/client/detaillaporan/${id}`)}
                         className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-emerald-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
                         <div className="relative h-60 bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
