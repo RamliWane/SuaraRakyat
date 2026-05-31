@@ -25,7 +25,7 @@ export default function DetailLaporanPending({ data }) {
         <div className="flex flex-col gap-3">
 
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
-                <div className="relative h-[260px] w-full overflow-hidden">
+                <div className="relative h-55 w-full overflow-hidden">
                     {data.image && data.image !== "no-image.jpg" ? (
                         <img
                             src={data.image}
@@ -38,7 +38,7 @@ export default function DetailLaporanPending({ data }) {
                             <p className="text-xs text-gray-400">Tidak ada foto</p>
                         </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 gradient-to-t from-black/70 via-black/20 to-transparent" />
 
                     <div className="absolute left-5 top-5 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-medium ${statusCfg.cls}`}>
@@ -107,13 +107,6 @@ export default function DetailLaporanPending({ data }) {
                             </div>
                         </div>
                     )}
-
-                    <label className="flex h-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 transition-all hover:border-emerald-300 hover:bg-emerald-50">
-                        <input type="file" className="hidden" accept="image/*" multiple />
-                        <i className="ti ti-cloud-upload text-2xl text-gray-300 mb-1.5" aria-hidden="true" />
-                        <p className="text-[11px] font-medium text-gray-400">Tambah Foto</p>
-                        <p className="text-[10px] text-gray-300 mt-0.5">JPG, PNG</p>
-                    </label>
                 </div>
             </div>
 
@@ -124,7 +117,7 @@ export default function DetailLaporanPending({ data }) {
                     <p className="mt-0.5 text-[12px] text-gray-400">Titik lokasi laporan dari warga</p>
                 </div>
 
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-emerald-50 h-[280px] flex flex-col items-center justify-center gap-3 relative">
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-emerald-50 h-56 flex flex-col items-center justify-center gap-3 relative">
                     <div
                         className="absolute inset-0 opacity-40"
                         style={{
@@ -145,7 +138,7 @@ export default function DetailLaporanPending({ data }) {
                 </div>
 
                 <div className="mt-3 flex items-start gap-3 rounded-xl bg-gray-50 border border-gray-100 p-4">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
                         <i className="ti ti-map-pin text-sm text-emerald-600" aria-hidden="true" />
                     </div>
                     <div>

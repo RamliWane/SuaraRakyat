@@ -39,7 +39,7 @@ export default function BikinLaporan() {
                                 <FormBikinLaporan />
                             </main>
                         </div>
-                        <aside className="hidden xl:block w-[240px] sticky top-0">
+                        <aside className="hidden xl:block w-53 sticky top-0">
                             <PanduanBikinLaporan />
                         </aside>
                     </div>

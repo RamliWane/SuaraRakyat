@@ -33,7 +33,7 @@ function Section({ children }) {
 function SectionHeader({ icon, title, subtitle }) {
     return (
         <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
                 <i className={`ti ${icon} text-sm text-emerald-600`} aria-hidden="true" />
             </div>
             <div>
@@ -82,14 +82,12 @@ export default function ActionDetailLaporan() {
                         >
                             <option value="menunggu">Pending</option>
                             <option value="diproses">Diproses</option>
-                            <option value="selesai">Selesai</option>
                             <option value="ditolak">Ditolak</option>
                         </select>
                         <i className="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true" />
                     </div>
                 </div>
 
-                {/* Prioritas */}
                 <div>
                     <Label>Tingkat prioritas</Label>
                     <div className="grid grid-cols-2 gap-2">
@@ -150,7 +148,6 @@ export default function ActionDetailLaporan() {
                 </div>
             </Section>
 
-            {/* Estimasi Proses */}
             <Section>
                 <SectionHeader
                     icon="ti-clock"

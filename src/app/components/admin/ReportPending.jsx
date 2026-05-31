@@ -93,7 +93,7 @@ export default function SubmissionPending({ token }) {
                         <span className="text-[12px] text-gray-400">{index + 1}</span>
 
                         {/* Foto */}
-                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-gray-100 shrink-0">
                             {item.image && item.image !== "no-image.jpg" ? (
                                 <img
                                     src={item.image}
@@ -109,7 +109,7 @@ export default function SubmissionPending({ token }) {
 
                         {/* Username */}
                         <div className="flex items-center gap-2 min-w-0">
-                            <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+                            <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">
                                 {item.username?.charAt(0).toUpperCase() ?? "U"}
                             </div>
                             <span className="text-[12px] font-medium text-gray-700 truncate">

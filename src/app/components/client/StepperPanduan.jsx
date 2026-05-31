@@ -408,7 +408,7 @@ function StepIndicator({
 
 function StepConnector({ isComplete }) {
   return (
-    <div className="relative mx-1 h-[1px] flex-1 overflow-hidden rounded bg-gray-300">
+    <div className="relative mx-1 h-1 flex-1 overflow-hidden rounded bg-gray-300">
       <motion.div
         initial={false}
         animate={{

@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
 import RightBar from "../../components/client/RightBar";
@@ -6,39 +5,19 @@ import LaporanCard from "../../components/client/LaporanCard";
 import FilterCategory from "../../components/client/FilterCategory";
 import HomeFooter from "../../components/client/HomeFooter";
 import ButtonBuatLaporan from "../../components/client/ButtonBuatLaporan";
+import { getAllLaporan } from "../../../lib/api/laporan";
+import { cookies } from "next/headers";
 
 export default async function home() {
     const cookieStore = await cookies();
-    const token = cookieStore.get("session_token")?.value;
-    let reporting = []; // Tempat penampung data utama
-    
-    try {
-        const cookieStore = await cookies();
-        const token = cookieStore.get("session_token")?.value; 
-        console.log("Token:", token);
+    const token = cookieStore.get("session_token")?.value ?? "";
 
-        const res = await fetch("http://localhost:5000/reporting", {
-            method: "GET",
-            cache: "no-store",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
-        });
-        
-        console.log("Status HTTP:", res.status);
-
-        const json = await res.json();
-
-        console.log("RAW JSON:", JSON.stringify(json));
-        console.log("json.data:", json.data);
-        
-        reporting = json.data || []; 
-        
-        console.log("Data Array Laporan sukses di-parsing:", reporting); 
-    } catch (error) {
-        console.error("Gagal mengambil data dari database:", error);
-    }
+        let reporting = [];
+        try {
+            reporting = await getAllLaporan();
+        } catch (err) {
+            console.error(err.message);
+        }
 
     const stats = [
         { label: "Total laporan Dibuat", value: "3", badge: "+12 hari ini", badgeColor: "bg-[#EAF3DE] text-[#27500A]" },
@@ -92,7 +71,7 @@ export default async function home() {
                                 <FilterCategory />
                             </section>
                             
-                           <LaporanCard dataLaporan={reporting} token={token} />
+                           <LaporanCard dataLaporan={reporting} token={token}/>
                         </div>
                     </main>
                     

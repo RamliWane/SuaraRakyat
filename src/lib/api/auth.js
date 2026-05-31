@@ -3,6 +3,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export async function loginAction(formData) {
     const res = await fetch("http://localhost:5000/auth/login", {
@@ -27,4 +28,10 @@ export async function loginAction(formData) {
     });
 
     redirect("/client/homepage");
+}
+
+export async function Logout() {
+    const cookieStore = await cookies();
+    cookieStore.delete("session_token");
+    return NextResponse.json({ success: true });
 }

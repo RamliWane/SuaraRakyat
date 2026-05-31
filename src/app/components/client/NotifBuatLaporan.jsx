@@ -26,7 +26,7 @@ export default function Toast() {
     const isSuccess = toast.type === "success";
 
     return (
-    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-[10px] px-[18px] py-[14px] min-w-[300px] max-w-[380px] transition-all duration-300
+    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-xl px-4 py-3 w-96 transition-all duration-300
     ${isSuccess
         ? "bg-[#0f1a13] border border-[#2a5c38] border-l-[3px] border-l-[#3dba6a]"
         : "bg-[#1a0f0f] border border-[#5c2a2a] border-l-[3px] border-l-[#e05252]"

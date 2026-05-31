@@ -76,7 +76,7 @@ export default function LaporanCard({ dataLaporan, token }) {
                         key={id}
                         className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-emerald-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
-                        <div className="relative h-[120px] bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <div className="relative h-60 bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
                             {image && image !== "no-image.jpg" ? (
                                 <img
                                     src={image}

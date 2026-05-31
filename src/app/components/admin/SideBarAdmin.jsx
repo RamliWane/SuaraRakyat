@@ -31,7 +31,7 @@ export default function SidebarAdmin() {
             <div className={`fixed lg:static top-0 left-0 h-screen z-40 shrink-0
                 transform transition-transform duration-300
                 ${isOpen ? "translate-x-0" : "-translate-x-full"}
-                lg:translate-x-0 w-[200px]`}>
+                lg:translate-x-0 w-49`}>
 
                 <div className="h-full bg-[#A2CB8B] shadow-xl text-white flex flex-col py-8 px-5">
                     <div className="flex flex-col gap-6 flex-1">
