@@ -32,11 +32,6 @@ export default async function DetailLaporanPendingPage({ params }) {
                     <div className="flex items-start gap-5">
 
                         <div className="flex flex-1 flex-col gap-5">
-                            <header>
-                                <h1 className="text-xl font-bold text-black">
-                                    DETAIL LAPORAN ADMIN
-                                </h1>
-                            </header>
 
                             <main>
                                 {error ? (
@@ -47,7 +42,7 @@ export default async function DetailLaporanPendingPage({ params }) {
                             </main>
                         </div>
 
-                        <aside className="hidden xl:block w-[280px] sticky top-0 shrink-0">
+                        <aside className="hidden xl:block w-65 sticky top-0 shrink-0">
                              {error ? error : (
                                 <ActionDetailLaporan 
                                     reportId={id} 

@@ -66,7 +66,7 @@ export default async function DetailLaporanUser({ params }) {
                                             ) : (
                                                 <i className="ti ti-photo-off text-4xl text-gray-300" />
                                             )}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                            <div className="absolute inset-0 gradient-to-t from-black/60 to-transparent" />
                                             <div className="absolute bottom-4 left-5 right-5">
                                                 <h1 className="text-xl font-bold text-white leading-tight">{laporan.judul}</h1>
                                             </div>
@@ -176,7 +176,7 @@ export default async function DetailLaporanUser({ params }) {
                                 </div>
 
                                 {/* KANAN — Komentar */}
-                                <div className="w-[300px] shrink-0 sticky top-0">
+                                <div className="w-75 shrink-0 sticky top-0">
                                     <CommentRightBar reportId={id} token={token} />
                                 </div>
 
