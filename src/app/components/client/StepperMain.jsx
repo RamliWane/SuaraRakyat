@@ -13,7 +13,6 @@ export default function StepperMain() {
             backButtonText="Kembali"
             nextButtonText="Lanjut"
         >
-            {/* STEP 1 */}
             <Step>
                 <div>
                     <span className="text-sm font-medium text-black">

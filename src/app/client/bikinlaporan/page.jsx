@@ -9,7 +9,7 @@ import PanduanBikinLaporan from "../../components/client/PanduanBikinLaporan";
 export default function BikinLaporan() {
     return (
         <div className="flex h-screen flex-col overflow-hidden">
-            <NavbarHome />
+            {/* <NavbarHome /> */}
 
             <div className="flex flex-1 overflow-hidden">
                 <SideBar className="flex-0" />

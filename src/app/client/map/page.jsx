@@ -37,7 +37,7 @@ const MapView = dynamic(() => import("../../components/client/MapView"), {
 export default function Map() {
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
-            <NavbarHome />
+            {/* <NavbarHome /> */}
             <div className="flex flex-1 overflow-hidden">
                 <SideBar />
                 <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">

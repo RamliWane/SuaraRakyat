@@ -5,7 +5,7 @@ export const api = {
         const res = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
         });
         const data = await res.json();
         if (!res.ok) 

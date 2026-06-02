@@ -70,21 +70,6 @@ export const menuNav = [
     ),
   },
     {
-    label: "Dashboard",
-    href: "/admin/dashboard",
-    icon: (
-       <svg xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        className="w-5 h-5">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                            d="M3 13.5l4.5-4.5 4.5 4.5L21 4.5M3 21h18" />
-                    </svg>
-    ),
-  },
-    {
     label: "Settings",
     href: "/settings",
     icon: (

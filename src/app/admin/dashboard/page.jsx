@@ -32,7 +32,7 @@ export default async function DashboardAdmin() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden text-black">
-      <NavbarHome />
+      {/* <NavbarHome /> */}
       <div className="flex flex-1 overflow-hidden">
         <SidebarAdmin />
 

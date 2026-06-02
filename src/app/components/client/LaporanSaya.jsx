@@ -2,6 +2,8 @@
 
 import CommentButton from "./CommentButton";
 import LikeButton from "./LikeButton";
+import { useRouter } from "next/navigation";
+
 
 const statusConfig = {
     pending:  { label: "Pending",  cls: "bg-amber-50 text-amber-700 border-amber-200",  dot: "bg-amber-500" },
@@ -29,6 +31,8 @@ function getAvatar(username = "") {
 }
 
 export default function LaporanSaya({ data = [], token }) {
+    const router = useRouter();
+
     if (data.length === 0) return (
         <div className="flex flex-col items-center justify-center py-20 text-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center">
@@ -48,44 +52,49 @@ export default function LaporanSaya({ data = [], token }) {
 
                 return (
                     <div key={id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-emerald-300 hover:shadow-sm transition-all duration-200 cursor-pointer">
-                        <div className="relative h-60 bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
-                            {image && image !== "no-image.jpg" ? (
-                                <img src={image} alt="foto laporan" className="w-full h-full object-cover" />
-                            ) : (
-                                <i className="ti ti-photo-off text-2xl text-gray-300" aria-hidden="true" />
-                            )}
-                            {category_name && (
-                                <span className="absolute top-2 left-2 bg-black/55 text-white text-[10px] font-medium px-2 py-1 rounded-md">
-                                    {category_name}
-                                </span>
-                            )}
+                        <div 
+                            onClick={() => router.push(`/client/detaillaporan/${id}`)}
+                        >
+                            <div className="relative h-70 bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
+                                {image && image !== "no-image.jpg" ? (
+                                    <img src={image} alt="foto laporan" className="w-full h-full object-cover" />
+                                ) : (
+                                    <i className="ti ti-photo-off text-2xl text-gray-300" aria-hidden="true" />
+                                )}
+                                {category_name && (
+                                    <span className="absolute top-2 left-2 bg-black/55 text-white text-[10px] font-medium px-2 py-1 rounded-md">
+                                        {category_name}
+                                    </span>
+                                )}
+                            </div>
+
+                            <div className="flex flex-col gap-2.5 p-3.5 flex-1">
+                                <div className="flex gap-1.5 flex-wrap">
+                                    {statusCfg && (
+                                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-medium px-2 py-0.5 rounded-md border ${statusCfg.cls}`}>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${statusCfg.dot}`} />
+                                            {statusCfg.label}
+                                        </span>
+                                    )}
+                                    {urgensi && (
+                                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md border ${urgensiConfig[urgensi] ?? urgensiConfig.rendah}`}>
+                                            {urgensi.charAt(0).toUpperCase() + urgensi.slice(1)}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <div className="flex-1">
+                                    <h3 className="text-[13px] font-semibold text-gray-900 leading-snug mb-1 line-clamp-2">
+                                        {judul || "Tanpa Judul"}
+                                    </h3>
+                                    <p className="text-[11px] text-gray-400 leading-relaxed line-clamp-2">
+                                        {deskripsi}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="flex flex-col gap-2.5 p-3.5 flex-1">
-                            <div className="flex gap-1.5 flex-wrap">
-                                {statusCfg && (
-                                    <span className={`inline-flex items-center gap-1.5 text-[10px] font-medium px-2 py-0.5 rounded-md border ${statusCfg.cls}`}>
-                                        <span className={`w-1.5 h-1.5 rounded-full ${statusCfg.dot}`} />
-                                        {statusCfg.label}
-                                    </span>
-                                )}
-                                {urgensi && (
-                                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md border ${urgensiConfig[urgensi] ?? urgensiConfig.rendah}`}>
-                                        {urgensi.charAt(0).toUpperCase() + urgensi.slice(1)}
-                                    </span>
-                                )}
-                            </div>
-
-                            <div className="flex-1">
-                                <h3 className="text-[13px] font-semibold text-gray-900 leading-snug mb-1 line-clamp-2">
-                                    {judul || "Tanpa Judul"}
-                                </h3>
-                                <p className="text-[11px] text-gray-400 leading-relaxed line-clamp-2">
-                                    {deskripsi}
-                                </p>
-                            </div>
-
-                            <div className="flex items-center justify-between pt-2.5 border-t border-gray-100 mt-auto">
+                            <div className="flex items-center justify-between pt-2.5 p-3 border-t border-gray-100 mt-auto">
                                 <div className="flex items-center gap-2 min-w-0">
                                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${avatarColor}`}>
                                         {username?.charAt(0).toUpperCase() ?? "U"}
@@ -112,7 +121,6 @@ export default function LaporanSaya({ data = [], token }) {
                                     />
                                 </div>
                             </div>
-                        </div>
                     </div>
                 );
             })}

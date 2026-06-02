@@ -10,7 +10,7 @@ export default async function KatalogClone() {
 
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black">
-            <NavbarHome />
+            {/* <NavbarHome /> */}
             <div className="flex flex-1 overflow-hidden">
                 <SidebarAdmin />
                 <div className="flex-1 flex flex-col overflow-y-auto no-scrollbar p-6 gap-4">

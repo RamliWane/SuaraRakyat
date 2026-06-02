@@ -78,8 +78,7 @@ export default function RightBar() {
     }, []);
 
     return (
-        <div className="w-70 flex flex-col gap-2 bg-gray-50 border-l border-gray-200 p-3 min-h-screen shrink-0">
-
+        <div className="w-70 flex flex-col gap-2 bg-gray-50 border-l border-gray-200 p-1 min-h-screen shrink-0">
             <Section>
                 <SectionHeader icon="ti-file-description" title="Laporan saya" linkLabel="Lihat semua" href="/client/submission" />
 

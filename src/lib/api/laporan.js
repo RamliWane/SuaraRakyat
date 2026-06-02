@@ -77,8 +77,23 @@ export async function getLaporanById(id, token) {
         headers: getAuthHeaders(token),
         cache: "no-store",
     });
-    if (!res.ok) throw new Error("Laporan tidak ditemukan");
-    const json = await res.json();
+
+    const text = await res.text();
+
+    // console.log("TOKEN:", token);
+
+    let json;
+    try {
+        json = JSON.parse(text);
+    } catch (e) {
+        console.error("INI BUKAN JSON:", text)
+        throw new Error("Response bukan JSON");
+    }
+
+    if (!res.ok) {
+        throw new Error(json?.error || "Laporan tidak ditemukan");
+    }
+
     return json.data;
 }
 
@@ -103,6 +118,16 @@ export async function getLaporanByUserId(userId, token) {
     if (!res.ok) throw new Error("Gagal mengambil laporan user");
     const json = await res.json();
     return json.data;
+}
+
+export async function updateStatusLaporan(id, status, token) {
+    const res = await fetch(`${BASE_URL}/reporting/${id}/status`, {
+        method: "PATCH",
+        headers: getAuthHeaders(token),
+        body: JSON.stringify({ status }),
+    });
+    if (!res.ok) throw new Error("Gagal update status");
+    return res.json();
 }
 
 export async function deleteLaporan(id, token) {

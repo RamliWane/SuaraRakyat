@@ -1,6 +1,9 @@
 "use client"
 
 import { useState } from "react";
+import { createFeedback } from "../../../lib/api/feedback";
+import { useRouter } from "next/navigation";
+import { updateStatusLaporan } from "../../../lib/api/laporan";
 
 const priorityConfig = {
     Darurat: "bg-red-50 text-red-700 border-red-200 hover:bg-red-100",
@@ -54,11 +57,41 @@ function Label({ children }) {
 
 const selectCls = "w-full h-10 px-3 text-sm bg-white border border-gray-200 rounded-xl text-gray-800 outline-none transition-all focus:border-emerald-400 focus:ring-2 focus:ring-emerald-50 appearance-none cursor-pointer";
 
-export default function ActionDetailLaporan() {
+export default function ActionDetailLaporan({ reportId, token }) {
     const [status, setStatus] = useState("menunggu");
-    const [priority, setPriority] = useState("");
-    const [assignee, setAssignee] = useState("");
     const [note, setNote] = useState("");
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+
+    async function handleSendFeedback() {
+        try {
+            await createFeedback(
+                {
+                    report_id: reportId,
+                    message: note,
+                },
+                token
+            );
+
+            alert("Feedback berhasil dikirim!");
+            setNote(""); // reset biar clean
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
+    }
+
+    async function handleUpdateStatus(status) {
+        setLoading(true);
+        try {
+            await updateStatusLaporan(reportId, status, token);
+            router.refresh(); // revalidate data tanpa reload penuh
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <div className="flex w-full flex-col gap-2">
@@ -89,23 +122,6 @@ export default function ActionDetailLaporan() {
                 </div>
 
                 <div>
-                    <Label>Tingkat prioritas</Label>
-                    <div className="grid grid-cols-2 gap-2">
-                        {["Darurat", "Tinggi", "Sedang", "Rendah"].map((item) => (
-                            <button
-                                key={item}
-                                type="button"
-                                onClick={() => setPriority(item)}
-                                className={`border rounded-xl py-2 text-[12px] font-medium transition-all cursor-pointer
-                                    ${priority === item ? priorityActive[item] : priorityConfig[item]}`}
-                            >
-                                {item}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <div>
                     <Label>Catatan</Label>
                     <textarea
                         value={note}
@@ -125,6 +141,8 @@ export default function ActionDetailLaporan() {
                     <div className="flex gap-2">
                         <button
                             type="button"
+                            onClick={() => handleUpdateStatus("ditolak")}
+                            disabled={loading}
                             className="flex-1 flex items-center justify-center gap-1.5 border border-red-200 text-red-600 bg-red-50 rounded-xl py-2.5 text-[12px] font-medium hover:bg-red-100 transition-colors cursor-pointer"
                         >
                             <i className="ti ti-x text-sm" aria-hidden="true" />
@@ -132,6 +150,8 @@ export default function ActionDetailLaporan() {
                         </button>
                         <button
                             type="button"
+                            onClick={() => handleUpdateStatus("diproses")}
+                            disabled={loading}
                             className="flex-1 flex items-center justify-center gap-1.5 bg-emerald-600 text-white rounded-xl py-2.5 text-[12px] font-medium hover:bg-emerald-700 transition-colors cursor-pointer border-0"
                         >
                             <i className="ti ti-check text-sm" aria-hidden="true" />
@@ -140,9 +160,10 @@ export default function ActionDetailLaporan() {
                     </div>
                     <button
                         type="button"
+                        onClick={handleSendFeedback}
                         className="w-full flex items-center justify-center gap-1.5 border border-gray-200 text-gray-600 bg-gray-50 rounded-xl py-2.5 text-[12px] font-medium hover:bg-gray-100 transition-colors cursor-pointer"
                     >
-                        <i className="ti ti-send text-sm" aria-hidden="true" />
+                        <i className="ti ti-send text-sm" />
                         Kirim notifikasi ke warga
                     </button>
                 </div>

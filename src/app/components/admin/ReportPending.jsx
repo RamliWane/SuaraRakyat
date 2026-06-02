@@ -134,7 +134,7 @@ export default function SubmissionPending({ token }) {
 
                         {/* Aksi */}
                         <button
-                            onClick={() => router.push(`/admin/detailreportpending?id=${item.id}`)}
+                            onClick={() => router.push(`/admin/detailreportpending/${item.id}`)}
                             className="flex items-center gap-1.5 bg-emerald-600 text-white text-[11px] font-medium px-3 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors cursor-pointer border-0 w-fit"
                         >
                             <i className="ti ti-settings text-[11px]" aria-hidden="true" />

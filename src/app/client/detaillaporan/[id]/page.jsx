@@ -15,7 +15,7 @@ export default async function DetailLaporanUser({ params }) {
 
     try {
         laporan = await getLaporanById(id, token);
-        feedback = await getFeedbackByReportId(id);
+        feedback = await getFeedbackByReportId(id, token);
     } catch (err) {
         console.error(err.message);
     }
@@ -38,13 +38,12 @@ export default async function DetailLaporanUser({ params }) {
 
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
-            <NavbarHome />
+            {/* <NavbarHome /> */}
             <div className="flex flex-1 overflow-hidden">
                 <SideBar className="flex-0" />
 
                 <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
                     <div className="p-5 flex flex-col gap-3">
-
                         <a href="/client/submission" className="flex items-center gap-1.5 text-[12px] text-gray-400 hover:text-gray-600 transition-colors w-fit">
                             <i className="ti ti-arrow-left text-sm" />
                             Kembali
@@ -58,12 +57,12 @@ export default async function DetailLaporanUser({ params }) {
                                 <p className="text-sm font-medium text-gray-800">Laporan tidak ditemukan</p>
                             </div>
                         ) : (
-                            <div className="flex gap-4 items-start">
-                                <div className="flex-1 min-w-0 flex flex-col gap-4">
+                            <div className="flex gap-2 items-start">
+                                <div className="flex-1 min-w-0 flex flex-col gap-2">
                                     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-                                        <div className="relative h-[220px] bg-gray-100 flex items-center justify-center overflow-hidden">
+                                        <div className="relative h-80 bg-gray-100 flex items-center justify-center overflow-hidden">
                                             {laporan.image && laporan.image !== "no-image.jpg" ? (
-                                                <img src={laporan.image} className="w-full h-full object-cover" alt="foto" />
+                                                <img src={laporan.image} className="w-full h-80 object-cover" alt="foto" />
                                             ) : (
                                                 <i className="ti ti-photo-off text-4xl text-gray-300" />
                                             )}

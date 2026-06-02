@@ -57,13 +57,10 @@ export default function DetailLaporanPending({ data }) {
                         )}
                     </div>
 
-                    <div className="absolute bottom-5 left-5 right-5">
-                        <h1 className="max-w-3xl text-2xl font-bold leading-tight text-white">
+                    <div className="absolute bottom-5 left-5 right-5 ">
+                        <h1 className="max-w-3xl text-2xl font-bold leading-tight text-black hover:text-white">
                             {data.judul ?? "Tanpa Judul"}
                         </h1>
-                        <p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-white/70">
-                            {data.deskripsi}
-                        </p>
                     </div>
                 </div>
 
@@ -79,6 +76,18 @@ export default function DetailLaporanPending({ data }) {
                     ))}
                 </div>
             </div>
+            
+            <div className="mt-3 flex items-start gap-3 rounded-xl bg-gray-50 border border-gray-100 p-4">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                        <i className="ti ti-map-pin text-sm text-emerald-600" aria-hidden="true" />
+                    </div>
+                    <div>
+                        <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Deskripsi</p>
+                        <p className="text-[13px] font-medium text-gray-800 leading-relaxed">
+                            {data.deskripsi ?? "Deskripsi tidak tersedia"}
+                        </p>
+                    </div>
+                </div>
 
             <div className="rounded-2xl border border-gray-200 bg-white p-5">
                 <div className="mb-4 flex items-center justify-between">
@@ -134,18 +143,6 @@ export default function DetailLaporanPending({ data }) {
                         </div>
                         <p className="text-[12px] font-medium text-emerald-700">Preview lokasi laporan</p>
                         <p className="text-[11px] text-emerald-500">Klik untuk buka peta penuh</p>
-                    </div>
-                </div>
-
-                <div className="mt-3 flex items-start gap-3 rounded-xl bg-gray-50 border border-gray-100 p-4">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
-                        <i className="ti ti-map-pin text-sm text-emerald-600" aria-hidden="true" />
-                    </div>
-                    <div>
-                        <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Alamat Lengkap</p>
-                        <p className="text-[13px] font-medium text-gray-800 leading-relaxed">
-                            {data.lokasi ?? "Lokasi tidak tersedia"}
-                        </p>
                     </div>
                 </div>
             </div>
