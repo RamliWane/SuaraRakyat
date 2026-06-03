@@ -4,6 +4,7 @@ import ActionDetailLaporan from '../../../components/admin/ActionDetailLaporan';
 import DetailLaporanPending from '../../../components/admin/DetailLaporanPending';
 import SidebarAdmin from '../../../components/admin/SideBarAdmin';
 
+
 export default async function DetailLaporanPendingPage({ params }) {
     const cookieStore = await cookies();
     const token = cookieStore.get("session_token")?.value ?? "";

@@ -1,3 +1,9 @@
+
+"use client";
+
+import dynamic from "next/dynamic";
+const LaporanMap = dynamic(() => import("./LaporanMap"), { ssr: false });
+
 const statusConfig = {
     pending:  { label: "Pending",  cls: "bg-amber-50 border-amber-200 text-amber-700",   dot: "bg-amber-500" },
     diproses: { label: "Diproses", cls: "bg-blue-50 border-blue-200 text-blue-700",     dot: "bg-blue-500" },
@@ -125,26 +131,7 @@ export default function DetailLaporanPending({ data }) {
                     <h2 className="text-[14px] font-semibold text-gray-900">Lokasi Laporan</h2>
                     <p className="mt-0.5 text-[12px] text-gray-400">Titik lokasi laporan dari warga</p>
                 </div>
-
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-emerald-50 h-56 flex flex-col items-center justify-center gap-3 relative">
-                    <div
-                        className="absolute inset-0 opacity-40"
-                        style={{
-                            backgroundImage: "linear-gradient(to right, #d1fae5 1px, transparent 1px), linear-gradient(to bottom, #d1fae5 1px, transparent 1px)",
-                            backgroundSize: "32px 32px",
-                        }}
-                    />
-                    <div className="relative z-10 flex flex-col items-center gap-2">
-                        <div className="relative">
-                            <span className="absolute inset-0 rounded-full bg-emerald-400/30 animate-ping" />
-                            <div className="relative w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-200">
-                                <i className="ti ti-map-pin text-xl text-white" aria-hidden="true" />
-                            </div>
-                        </div>
-                        <p className="text-[12px] font-medium text-emerald-700">Preview lokasi laporan</p>
-                        <p className="text-[11px] text-emerald-500">Klik untuk buka peta penuh</p>
-                    </div>
-                </div>
+                <LaporanMap lat={data.lat} lng={data.lng} judul={data.judul} />
             </div>
         </div>
     );

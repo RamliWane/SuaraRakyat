@@ -23,7 +23,7 @@ export default async function Profile() {
 
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
-            <NavbarHome />
+            {/* <NavbarHome /> */}
             <div className="flex flex-1 overflow-hidden">
                 <SideBar className="flex-0" />
 

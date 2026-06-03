@@ -15,6 +15,8 @@ export default async function tambahLaporan(prevState, formData) {
         lokasi: formData.get("lokasi"),
         category_id: Number(formData.get("category_id")),
         image: formData.get("image") ?? "no-image.jpg",
+        lat: formData.get("lat") ? Number(formData.get("lat")) : null,
+        lng: formData.get("lng") ? Number(formData.get("lng")) : null,
     };
 
 

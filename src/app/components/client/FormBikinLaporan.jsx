@@ -4,12 +4,17 @@ import { useActionState, useEffect, useState } from "react";
 import tambahLaporan from "../../../lib/api/laporan";
 import NotifBuatLaporan, { showToast } from "./NotifBuatLaporan";
 import supabase from "../../../lib/supabase";
+import dynamic from "next/dynamic";
+
+const PilihLokasi = dynamic(() => import("./PilihLokasi"), { ssr: false });
 
 export default function FormBikinLaporan() {
     const [state, formAction, isPending] = useActionState(tambahLaporan, null);
     const [imageUrl, setImageUrl] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [uploading, setUploading] = useState(false);
+    const [coords, setCoords] = useState(null);
+    const [alamat, setAlamat] = useState("");
 
     useEffect(() => {
         if (!state) return;
@@ -26,10 +31,8 @@ export default function FormBikinLaporan() {
 
         const fileName = `${Date.now()}-${file.name}`;
         const { data, error } = await supabase.storage
-            .from("laporan-images") // nama bucket lo di Supabase
+            .from("laporan-images")
             .upload(fileName, file);
-
-              console.log("upload result:", data, error); 
 
         if (error) {
             showToast("Gagal upload gambar", "error");
@@ -43,6 +46,17 @@ export default function FormBikinLaporan() {
 
         setImageUrl(urlData.publicUrl);
         setUploading(false);
+    }
+
+    async function handleMapClick({ lat, lng }) {
+        setCoords({ lat, lng });
+
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+            { headers: { "Accept-Language": "id" } }
+        );
+        const data = await res.json();
+        setAlamat(data.display_name ?? "");
     }
 
     const inputCls = "h-11 w-full px-4 text-sm bg-white border border-gray-200 rounded-xl text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-50";
@@ -70,6 +84,7 @@ export default function FormBikinLaporan() {
 
                 <form action={formAction} className="p-6 flex flex-col gap-5">
 
+                    {/* Foto Bukti */}
                     <div>
                         <label className={labelCls}>
                             <i className="ti ti-photo mr-1.5 text-gray-400" />
@@ -109,36 +124,23 @@ export default function FormBikinLaporan() {
                         </div>
                     </div>
 
-                    {/* Hidden field buat kirim URL gambar ke server action */}
                     <input type="hidden" name="image" value={imageUrl ?? "no-image.jpg"} />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label className={labelCls}>
-                                <i className="ti ti-heading mr-1.5 text-gray-400" aria-hidden="true" />
-                                Judul Laporan
-                            </label>
-                            <input
-                                name="judul"
-                                type="text"
-                                placeholder="Contoh: Jalan berlubang di Jl. Mawar"
-                                className={inputCls}
-                            />
-                        </div>
-                        <div>
-                            <label className={labelCls}>
-                                <i className="ti ti-map-pin mr-1.5 text-gray-400" aria-hidden="true" />
-                                Lokasi Kejadian
-                            </label>
-                            <input
-                                name="lokasi"
-                                type="text"
-                                placeholder="Contoh: Jl. Mawar No. 12, Depok"
-                                className={inputCls}
-                            />
-                        </div>
+                    {/* Judul */}
+                    <div>
+                        <label className={labelCls}>
+                            <i className="ti ti-heading mr-1.5 text-gray-400" aria-hidden="true" />
+                            Judul Laporan
+                        </label>
+                        <input
+                            name="judul"
+                            type="text"
+                            placeholder="Contoh: Jalan berlubang di Jl. Mawar"
+                            className={inputCls}
+                        />
                     </div>
 
+                    {/* Kategori + Urgensi */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className={labelCls}>
@@ -171,20 +173,32 @@ export default function FormBikinLaporan() {
                         </div>
                     </div>
 
+                    {/* Map + Lokasi */}
                     <div>
                         <label className={labelCls}>
                             <i className="ti ti-map mr-1.5 text-gray-400" aria-hidden="true" />
-                            Preview Lokasi
+                            Pilih Lokasi di Peta
                         </label>
-                        <div className="h-48 rounded-xl border border-gray-200 bg-emerald-50 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-emerald-100 transition-colors">
-                            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
-                                <i className="ti ti-map-pin text-xl text-emerald-600" aria-hidden="true" />
-                            </div>
-                            <p className="text-[13px] font-medium text-emerald-700">Klik untuk pilih lokasi</p>
-                            <p className="text-[11px] text-emerald-500">atau isi lokasi di field di atas</p>
+                        <div className="h-70 rounded-xl border border-gray-200 overflow-hidden mb-2">
+                            <PilihLokasi coords={coords} onMapClick={handleMapClick} />
                         </div>
+                        <input
+                            name="lokasi"
+                            type="text"
+                            value={alamat}
+                            onChange={(e) => setAlamat(e.target.value)}
+                            placeholder="Klik peta untuk isi otomatis, atau ketik manual..."
+                            className={inputCls}
+                        />
+                        <p className="text-[11px] text-gray-400 mt-1">
+                            Klik pada peta untuk menentukan titik lokasi kejadian.
+                        </p>
                     </div>
 
+                    <input type="hidden" name="lat" value={coords?.lat ?? ""} />
+                    <input type="hidden" name="lng" value={coords?.lng ?? ""} />
+
+                    {/* Deskripsi */}
                     <div>
                         <label className={labelCls}>
                             <i className="ti ti-align-left mr-1.5 text-gray-400" aria-hidden="true" />
