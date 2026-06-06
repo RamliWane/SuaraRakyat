@@ -8,7 +8,7 @@ export function middleware(request) {
 
     if (!token) {
         if (publicPaths.includes(pathname)) return NextResponse.next();
-        return NextResponse.redirect(new URL("/", request.url));
+        return NextResponse.redirect(new URL("/client/auth/login", request.url)); // ← langsung ke login
     }
 
     try {
@@ -20,7 +20,7 @@ export function middleware(request) {
         }
 
     } catch {
-        return NextResponse.redirect(new URL("/", request.url));
+        return NextResponse.redirect(new URL("/client/auth/login", request.url)); // ← sama
     }
 
     return NextResponse.next();

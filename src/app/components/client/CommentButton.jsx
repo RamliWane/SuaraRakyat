@@ -97,7 +97,7 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                             {/* Header user */}
                             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold">
                                         {username?.charAt(0).toUpperCase() || "A"}
                                     </div>
                                     <span className="text-[13px] font-semibold text-gray-900">{username}</span>
@@ -110,7 +110,7 @@ export default function CommentButton({ reportId, token, username, judul, deskri
 
                             {/* Deskripsi post */}
                             <div className="flex gap-3 px-4 py-3 border-b border-gray-100 shrink-0">
-                                <div className="w-8 h-8 rounded-full gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
                                     {username?.charAt(0).toUpperCase() || "A"}
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -132,7 +132,7 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                                 ) : (
                                     comments.map((c) => (
                                         <div key={c.id} className="flex gap-3 items-start">
-                                            <div className="w-8 h-8 rounded-full gradient-to-br from-orange-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
                                                 {c.username?.charAt(0).toUpperCase()}
                                             </div>
                                             <div className="flex-1 min-w-0">
