@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 const LaporanMap = dynamic(() => import("./LaporanMap"), { ssr: false });
 
 const statusConfig = {
-    pending:  { label: "Pending",  cls: "bg-amber-50 border-amber-200 text-amber-700",   dot: "bg-amber-500" },
-    diproses: { label: "Diproses", cls: "bg-blue-50 border-blue-200 text-blue-700",     dot: "bg-blue-500" },
-    selesai:  { label: "Selesai",  cls: "bg-emerald-50 border-emerald-200 text-emerald-700", dot: "bg-emerald-500" },
-    ditolak:  { label: "Ditolak",  cls: "bg-red-50 border-red-200 text-red-700",         dot: "bg-red-500" },
+    pending:  { label: "Pending",  cls: "bg-amber-50 border-amber-200 text-amber-700"    },
+    diproses: { label: "Diproses", cls: "bg-blue-50 border-blue-200 text-blue-700"    },
+    selesai:  { label: "Selesai",  cls: "bg-emerald-50 border-emerald-200 text-emerald-700"},
+    ditolak:  { label: "Ditolak",  cls: "bg-red-50 border-red-200 text-red-700"},
 };
 
 export default function DetailLaporanPending({ data }) {
@@ -48,7 +48,6 @@ export default function DetailLaporanPending({ data }) {
 
                     <div className="absolute left-5 top-5 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-medium ${statusCfg.cls}`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${statusCfg.dot}`} />
                             {statusCfg.label}
                         </span>
                         {data.category_name && (

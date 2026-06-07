@@ -52,7 +52,7 @@ body {
 
 @media (min-width: 1280px) {
   .main-grid {
-    grid-template-columns: 1.9fr 1.9fr 1fr;
+    grid-template-columns: 1.9fr 1fr 1.3fr;
     grid-template-areas:
       "header header aside"
       "main main aside"

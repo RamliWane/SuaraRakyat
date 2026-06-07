@@ -19,7 +19,6 @@ export async function loginAction(formData) {
 
     const cookieStore = await cookies();
     cookieStore.set("session_token", data.session_token, {
-        httpOnly: true,
         path: "/",
         maxAge: 25200,
         sameSite: "lax"

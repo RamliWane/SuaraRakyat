@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import { libraryNav, menuNav } from "../../../lib/navigationitems";
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -43,10 +44,9 @@ export default function Sidebar() {
                     ${expanded ? "w-[200px]" : "w-[60px]"}`}
             >
                 <div className="h-full bg-[#A2CB8B] rounded-r-2xl shadow-xl text-white flex flex-col py-8 px-3 overflow-hidden">
-                    <div className="flex flex-col gap-6 flex-1">
-
+                
+                    <div className="flex flex-col gap-3 flex-1 justify-center">
                         <div>
-
                             <ul className="flex flex-col gap-2">
                                 {libraryNav.map((item) => (
                                     <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>

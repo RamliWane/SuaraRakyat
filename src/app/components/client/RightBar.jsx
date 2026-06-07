@@ -12,10 +12,10 @@ const categoryIcons = {
 };
 
 const statusConfig = {
-    pending:  { badge: "bg-amber-50 text-amber-800",      bar: "bg-amber-400",    progress: 10 },
-    diproses: { badge: "bg-blue-50 text-blue-800",        bar: "bg-blue-400",     progress: 50 },
-    selesai:  { badge: "bg-emerald-50 text-emerald-800",  bar: "bg-emerald-500",  progress: 100 },
-    ditolak:  { badge: "bg-red-50 text-red-800",          bar: "bg-red-400",      progress: 100 },
+    pending:  { badge: "bg-amber-50 text-amber-700 border-amber-200",      bar: "bg-amber-400",    progress: 10 },
+    diproses: { badge: "bg-blue-50 text-blue-700 border-blue-200",        bar: "bg-blue-400",     progress: 50 },
+    selesai:  { badge: "bg-emerald-50 text-emerald-800 border-emerald-200",  bar: "bg-emerald-500",  progress: 100 },
+    ditolak:  { badge: "bg-red-50 text-red-800 border-red-200",        bar: "bg-red-400",      progress: 100 },
 };
 
 const trending = [
@@ -78,7 +78,7 @@ export default function RightBar() {
     }, []);
 
     return (
-        <div className="w-70 flex flex-col gap-2 bg-gray-50 border-l border-gray-200 p-1 min-h-screen shrink-0">
+        <div className="w-90 flex flex-col gap-6 border-l border-gray-200 p-1 min-h-screen shrink-0">
             <Section>
                 <SectionHeader icon="ti-file-description" title="Laporan saya" linkLabel="Lihat semua" href="/client/submission" />
 
@@ -97,7 +97,7 @@ export default function RightBar() {
                                 <div className="flex-1 min-w-0 flex flex-col gap-1">
                                     <div className="flex justify-between items-start gap-1">
                                         <span className="text-[11px] font-medium text-gray-800 truncate">{r.judul}</span>
-                                        <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded shrink-0 ${cfg.badge}`}>
+                                        <span className={`text-[9px] px-1.5 py-0.5 font-medium border rounded shrink-0 ${cfg.badge}`}>
                                             {r.status}
                                         </span>
                                     </div>

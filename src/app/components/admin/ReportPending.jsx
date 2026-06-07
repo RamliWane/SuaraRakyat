@@ -12,9 +12,9 @@ const statusConfig = {
 };
 
 const urgensiConfig = {
-    tinggi: "bg-red-50 text-red-700",
-    sedang: "bg-amber-50 text-amber-700",
-    rendah: "bg-gray-100 text-gray-500",
+    tinggi: "bg-red-50 text-red-700 border-red-200",
+    sedang: "bg-amber-50 text-amber-700 border-amber-200",
+    rendah: "bg-gray-100 text-gray-500 border-gray-200",
 };
 
 export default function SubmissionPending({ token }) {
@@ -118,7 +118,7 @@ export default function SubmissionPending({ token }) {
                         </div>
 
                         {/* Status */}
-                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md border w-fit ${statusConfig[item.status?.toLowerCase()] ?? "bg-gray-100 text-gray-600 border-gray-200"}`}>
+                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-[5px] border w-fit ${statusConfig[item.status?.toLowerCase()] ?? "bg-gray-100 text-gray-600 border-gray-200"}`}>
                             {item.status}
                         </span>
 
@@ -128,7 +128,7 @@ export default function SubmissionPending({ token }) {
                         </span>
 
                         {/* Urgensi */}
-                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md w-fit ${urgensiConfig[item.urgensi?.toLowerCase()] ?? "bg-gray-100 text-gray-500"}`}>
+                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-[5px] w-fit ${urgensiConfig[item.urgensi?.toLowerCase()] ?? "bg-gray-100 text-gray-500"}`}>
                             {item.urgensi}
                         </span>
 

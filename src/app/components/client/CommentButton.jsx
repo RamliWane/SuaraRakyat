@@ -65,8 +65,8 @@ export default function CommentButton({ reportId, token, username, judul, deskri
     return (
         <>
             <button onClick={handleOpen} className="flex items-center gap-1 text-gray-400 hover:text-blue-500 transition-colors">
-                <MessageCircle className="w-4 h-4" />
-                <span className="text-[11px]">{commentCount}</span>
+                <MessageCircle className="w-6 h-6" />
+                <span className="text-[16px]">{commentCount}</span>
             </button>
 
             {open && (

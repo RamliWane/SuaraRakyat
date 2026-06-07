@@ -17,11 +17,11 @@ export default function LikeButton() {
     return (
         <div className="flex gap-1 ml-auto text-gray-400">
             <Heart onClick={handleLike} 
-                className={`w-4 h-4 cursor-pointer transition-colors 
+                className={`w-6 h-6 cursor-pointer transition-colors 
                     ${liked ? "text-red-500" 
                             : "hover:text-red-500"
                 }`} />
-            <span className="text-[11px]">{totalLikes}</span>
+            <span className="text-[16px]">{totalLikes}</span>
         </div>
     )
 }

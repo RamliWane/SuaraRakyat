@@ -48,42 +48,32 @@ export default function Register() {
     };
 
     return (
-        <div className="flex min-h-screen bg-emerald-50 relative overflow-hidden">
+        <div
+            className="flex min-h-screen relative overflow-hidden"
+            style={{
+                backgroundImage: "url('/assets/gambar_register2.jpeg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
 
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute -top-32 -left-24 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(5,150,105,0.12)_0%,transparent_70%)]" />
                 <div className="absolute -bottom-24 -right-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.10)_0%,transparent_70%)]" />
             </div>
 
-            <div className="hidden md:flex w-1/2 relative z-10 items-center justify-center p-10">
-                <div className="relative w-full max-w-sm">
 
-                    <div className="absolute -top-4 -left-4 bg-emerald-600 text-white px-3 py-2 rounded-xl shadow-lg text-xs font-semibold">
-                        Bergabung<br />Sekarang
-                    </div>
 
-                    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-lg aspect-[3/4]">
-                        <img
-                            src="/assets/guberkaltim.jpeg"
-                            className="w-120 h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-transparent" />
-                    </div>
-                </div>
-            </div>
-
-            <div className="relative bg-white z-10 rounded-4xl w-full md:w-1/2 flex flex-col justify-center px-8 py-12 md:px-16">
-
-                <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-200 rounded-full px-3 py-1.5 mb-10 w-fit">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                    <span className="text-[11px] text-emerald-600 uppercase tracking-widest font-medium">
+            <div className="relative bg-white z-10 rounded-4xl w-full md:w-1/2 md:ml-auto flex flex-col justify-center px-8 py-12 md:px-16">
+                <div className="inline-flex items-center gap-2 bg-[#A2CB8B] rounded-full px-3 py-1.5 mb-10 w-fit">
+                    <span className="text-[11px] text-white uppercase tracking-widest font-medium">
                         Buat Akun Baru
                     </span>
                 </div>
 
                 <h1 className="font-medium text-gray-900 text-4xl md:text-5xl mb-3">
                     Daftar &
-                    <span className="text-emerald-600"> Mulai Sekarang</span>
+                    <span className="text-[#A2CB8B]"> Mulai Sekarang</span>
                 </h1>
 
                 <p className="text-gray-500 text-sm font-medium mb-10">
@@ -138,7 +128,7 @@ export default function Register() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="mt-2 w-full py-3 bg-emerald-600 text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition-all disabled:opacity-50"
+                        className="mt-2 w-full py-3 bg-[#A2CB8B] text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition-all disabled:opacity-50"
                     >
                         {loading ? 'Loading...' : 'Daftar'}
                     </button>
@@ -146,8 +136,8 @@ export default function Register() {
 
                 <div className="flex justify-between items-center mt-5">
                     <span className="text-gray-500 text-xs">Sudah punya akun?</span>
-                    <a href="/client/auth/login" className="text-emerald-600 text-xs font-medium hover:underline">
-                        Masuk →
+                    <a href="/client/auth/login" className="text-[#A2CB8B] text-xs font-semibold hover:underline">
+                        Masuk
                     </a>
                 </div>
 

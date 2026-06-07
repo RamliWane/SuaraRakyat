@@ -43,14 +43,10 @@ export default function SidebarAdmin() {
                     ${expanded ? "w-[200px]" : "w-[60px]"}`}
             >
                 <div className="h-full bg-[#A2CB8B] rounded-r-2xl shadow-xl text-white flex flex-col py-8 px-3 overflow-hidden">
-                    <div className="flex flex-col gap-6 flex-1">
+                    <div className="flex flex-col gap-3 flex-1 justify-center">
 
                         <div>
-                            {expanded && (
-                                <h1 className="text-[10px] font-bold tracking-widest text-white uppercase mb-3 px-1 whitespace-nowrap">
-                                    NAVIGATION
-                                </h1>
-                            )}
+                            
                             <ul className="flex flex-col gap-2">
                                 {AdminNavigation.map((item) => (
                                     <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>
@@ -70,11 +66,7 @@ export default function SidebarAdmin() {
                         </div>
 
                         <div>
-                            {expanded && (
-                                <h1 className="text-[10px] font-bold tracking-widest text-white uppercase mb-3 px-1 whitespace-nowrap">
-                                    MENU
-                                </h1>
-                            )}
+                            
                             <ul className="flex flex-col gap-1">
                                 {AdminNavigationMenu.map((item) => (
                                     <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>
