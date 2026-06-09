@@ -39,10 +39,11 @@ export async function createFeedback({ report_id, message }, token) {
         data = JSON.parse(text);
     } catch {
         console.error("RESPON ASLI:", text);
-        throw new Error("API tidak mengembalikan JSON");
+        throw Error("API tidak mengembalikan JSON");
     }
 
     if (!res.ok) {
+        console.error("API ERROR:", data);
         throw new Error(data.message || "Gagal kirim feedback");
     }
 

@@ -20,7 +20,6 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                 const data = await getComments(reportId, token);
                 setCommentCount(data.length);
             } catch {
-                // silent fail
             }
         }
         fetchCount();
@@ -33,7 +32,6 @@ export default function CommentButton({ reportId, token, username, judul, deskri
         setCommentCount(data.length);
     }
 
-    // ganti handleSubmit
 
     async function handleOpen() {
         setOpen(true);
@@ -64,20 +62,17 @@ export default function CommentButton({ reportId, token, username, judul, deskri
 
     return (
         <>
-            <button onClick={handleOpen} className="flex items-center gap-1 text-gray-400 hover:text-blue-500 transition-colors">
+            <button onClick={handleOpen} className="flex items-center gap-1 text-gray-400 hover:text-[#A2CB8B] transition-colors">
                 <MessageCircle className="w-6 h-6" />
                 <span className="text-[16px]">{commentCount}</span>
             </button>
 
             {open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    {/* Backdrop */}
                     <div className="absolute inset-0 bg-black/80" onClick={() => setOpen(false)} />
 
-                    {/* Modal split */}
                     <div className="relative bg-white w-full max-w-5xl rounded-xl overflow-hidden flex" style={{ height: "90vh" }}>
 
-                        {/* KIRI — Gambar */}
                         <div className="flex-1 bg-black flex items-center justify-center">
                             {image && image !== "no-image.jpg" ? (
                                 <img src={image} alt="laporan" className="w-full h-full object-contain" />
@@ -91,13 +86,11 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                             )}
                         </div>
 
-                        {/* KANAN — Komentar */}
                         <div className="w-96 flex flex-col shrink-0 border-l border-gray-200">
 
-                            {/* Header user */}
                             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold">
+                                    <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-[12px] font-bold">
                                         {username?.charAt(0).toUpperCase() || "A"}
                                     </div>
                                     <span className="text-[13px] font-semibold text-gray-900">{username}</span>
@@ -108,9 +101,8 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                                 </div>
                             </div>
 
-                            {/* Deskripsi post */}
                             <div className="flex gap-3 px-4 py-3 border-b border-gray-100 shrink-0">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-[12px] font-bold shrink-0">
                                     {username?.charAt(0).toUpperCase() || "A"}
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -121,7 +113,6 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                                 </div>
                             </div>
 
-                            {/* List komentar */}
                             <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-5">
                                 {comments.length === 0 ? (
                                     <div className="flex flex-col items-center justify-center h-full gap-2">
@@ -132,7 +123,7 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                                 ) : (
                                     comments.map((c) => (
                                         <div key={c.id} className="flex gap-3 items-start">
-                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
+                                            <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-[12px] font-bold shrink-0">
                                                 {c.username?.charAt(0).toUpperCase()}
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -153,33 +144,6 @@ export default function CommentButton({ reportId, token, username, judul, deskri
                                 )}
                             </div>
 
-                            <div className="px-4 py-2 border-t border-gray-100 shrink-0">
-                                <div className="flex items-center justify-between mb-2">
-                                    <div className="flex items-center gap-3">
-                                        <button className="group">
-                                            <Heart className="w-6 h-6 text-gray-800 group-hover:text-red-500 transition-colors" />
-                                        </button>
-                                        <button>
-                                            <MessageCircle className="w-6 h-6 text-gray-800" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Emoji bar */}
-                            <div className="px-4 pb-2 flex gap-2 shrink-0">
-                                {["❤️", "🙌", "🔥", "👏", "😢", "😍", "😮", "😂"].map((emoji) => (
-                                    <button
-                                        key={emoji}
-                                        onClick={() => setInput(prev => prev + emoji)}
-                                        className="text-lg hover:scale-125 transition-transform"
-                                    >
-                                        {emoji}
-                                    </button>
-                                ))}
-                            </div>
-
-                            {/* Input */}
                             <div className="px-4 py-3 border-t border-gray-100 flex items-center gap-3 shrink-0">
                                 <div className="w-7 h-7 rounded-full gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center text-white text-[11px] font-bold shrink-0">
                                     A

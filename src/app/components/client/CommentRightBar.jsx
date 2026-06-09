@@ -99,19 +99,6 @@ export default function CommentRightBar({ reportId, token }) {
                 )}
             </div>
 
-            {/* Emoji bar */}
-            <div className="px-4 py-2 border-t border-gray-100 shrink-0 flex gap-1.5 overflow-x-auto no-scrollbar">
-                {["❤️", "🙌", "🔥", "👏", "😢", "😍", "😮", "😂"].map((emoji) => (
-                    <button
-                        key={emoji}
-                        onClick={() => setInput(prev => prev + emoji)}
-                        className="text-base hover:scale-125 transition-transform shrink-0"
-                    >
-                        {emoji}
-                    </button>
-                ))}
-            </div>
-
             {/* Input */}
             <div className="px-4 py-3 border-t border-gray-100 shrink-0 flex items-center gap-2">
                 <input

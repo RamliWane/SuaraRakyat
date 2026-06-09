@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import NavbarHome from "../../components/client/NavbarHome";
 import SideBar from "../../components/client/SideBar";
-import FilterCategory from "../../components/client/FilterCategory";
 import { useEffect, useState } from "react";
 import { getAllLaporan } from "../../../lib/api/laporan";
 
@@ -72,7 +71,6 @@ export default function Map() {
 
     return (
         <div className="h-screen flex flex-col overflow-hidden text-black bg-gray-50">
-            {/* <NavbarHome /> */}
             <div className="flex flex-1 overflow-hidden">
                 <SideBar />
                 <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
@@ -101,9 +99,7 @@ export default function Map() {
                             <div className="flex-1 bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col">
 
                                 <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 gap-3 flex-wrap">
-                                    <div className="flex gap-1.5 flex-wrap">
-                                        <FilterCategory />
-                                    </div>
+
                                     <div className="flex gap-1.5">
                                         {statusFilters.map((s) => (
                                             <button
@@ -124,7 +120,6 @@ export default function Map() {
 
                             <div className="w-[270px] flex-shrink-0 bg-white border border-gray-200 rounded-2xl flex flex-col overflow-hidden shadow-sm">
 
-                                {/* HEADER */}
                                 <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
                                     <span className="text-[12px] font-semibold text-gray-900 flex items-center gap-1.5">
                                         <i className="ti ti-list text-gray-400 text-[13px]" />
@@ -136,7 +131,6 @@ export default function Map() {
                                     </span>
                                 </div>
 
-                                {/* LIST */}
                                 <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col divide-y divide-gray-100">
 
                                     {recentPins.length === 0 && (
@@ -150,7 +144,6 @@ export default function Map() {
                                             key={r.id || i}
                                             className="px-4 py-3 hover:bg-gray-50 transition-all duration-150 cursor-pointer"
                                         >
-                                            {/* TOP */}
                                             <div className="flex items-center justify-between gap-2 mb-1.5">
                                                 <span
                                                     className={`text-[9px] font-medium px-1.5 py-0.5 rounded border ${getStatusStyle(r.status)}`}
@@ -163,12 +156,10 @@ export default function Map() {
                                                 </span>
                                             </div>
 
-                                            {/* TITLE */}
                                             <p className="text-[12px] font-medium text-gray-800 leading-snug line-clamp-2 mb-1">
                                                 {r.judul || "-"}
                                             </p>
 
-                                            {/* BOTTOM */}
                                             <div className="flex items-center justify-between">
                                                 <span className="text-[10px] text-gray-400 flex items-center gap-1">
                                                     <i className="ti ti-map-pin text-[10px]" />
@@ -184,7 +175,6 @@ export default function Map() {
                                     ))}
                                 </div>
 
-                                {/* FOOTER */}
                                 <div className="px-4 py-3 border-t border-gray-100">
                                     <button
                                         type="button"

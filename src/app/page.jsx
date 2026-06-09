@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import BlurText from "./components/client/BlurText";
 import CardNav from "./components/client/Navbar";
 import { useState } from "react";
@@ -229,7 +230,8 @@ function FaqRow({ item }) {
   );
 }
 
-export default function Home() {
+export default function LandingPage() {
+  const router = useRouter();
 
   const handleAnimationComplete = () => {
     console.log('Animation completed!');
@@ -304,11 +306,6 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center min-h-screen px-6 pb-20">
             <section className="text-center flex flex-col items-center max-w-3xl">
 
-              <span className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-medium uppercase tracking-widest mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700">
-                <i className="ti ti-speakerphone text-sm" aria-hidden="true" />
-                Platform Aspirasi Warga Indonesia
-              </span>
-
               <BlurText
                 text="Suaramu Bisa Ubah Indonesia"
                 delay={200}
@@ -318,25 +315,19 @@ export default function Home() {
                 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 leading-tight mb-5"
               />
 
-              <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-xl mb-10">
+              <p className="text-black text-base md:text-lg leading-relaxed max-w-xl mb-10">
                 Wadah aspirasi warga untuk melaporkan permasalahan lingkungan dan sosial secara terbuka dan transparan.{" "}
-                <span className="text-emerald-700 font-semibold">Bukan omong doang.</span>
+                <span className="font-semibold">Bukan omong doang.</span>
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
                 <button
                   type="button"
-                  className="bg-emerald-700 text-white border-0 rounded-xl px-8 py-4 text-sm font-bold flex items-center gap-2 cursor-pointer transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 shadow-lg shadow-emerald-200"
+                  onClick={() => router.push("/client/auth/login")}
+                  className="bg-[#A2CB8B] text-white border-0 rounded-xl px-8 py-4 text-sm font-bold flex items-center gap-2 cursor-pointer transition-all duration-200 hover:bg-[#A2CB8B]/80 hover:-translate-y-0.5"
                 >
                   <i className="ti ti-edit text-base" aria-hidden="true" />
                   Buat Laporan Sekarang
-                </button>
-                <button
-                  type="button"
-                  className="bg-white text-gray-700 border border-gray-200 rounded-xl px-8 py-4 text-sm font-medium flex items-center gap-2 cursor-pointer transition-all duration-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 shadow-sm"
-                >
-                  <i className="ti ti-eye text-base" aria-hidden="true" />
-                  Lihat Laporan Terbaru
                 </button>
               </div>
 
@@ -348,7 +339,7 @@ export default function Home() {
                   { icon: "ti-users", label: "48.200+ Warga Aktif" },
                 ].map((item) => (
                   <span key={item.label} className="flex items-center gap-1.5 text-xs text-gray-400">
-                    <i className={`ti ${item.icon} text-emerald-500 text-sm`} aria-hidden="true" />
+                    <i className={`ti ${item.icon} text-[#A2CB8B] text-sm`} aria-hidden="true" />
                     {item.label}
                   </span>
                 ))}

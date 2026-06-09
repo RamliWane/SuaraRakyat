@@ -68,7 +68,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                         key={id}
                         className="bg-white flex flex-col group pb-2"
                     >
-                        {/* ── Header: avatar + username + lokasi ── */}
                         <div
                             className="flex items-center gap-2.5 px-3.5 pt-3 pb-2.5 cursor-pointer"
                             onClick={() => router.push(`/client/detaillaporan/${id}`)}
@@ -82,7 +81,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                                 </p>
                                 
                             </div>
-                            {/* 3-dot menu placeholder */}
                             <button className="text-gray-400 hover:text-gray-600 p-1 -mr-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i className="ti ti-dots text-base" />
                             </button>
@@ -105,14 +103,12 @@ export default function LaporanCard({ dataLaporan, token }) {
                                 </div>
                             )}
 
-                            {/* Category chip — top left */}
                             {category_name && (
                                 <span className="absolute top-2 left-2 bg-black/55 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded-md">
                                     {category_name}
                                 </span>
                             )}
 
-                            {/* Urgensi chip — top right */}
                             {urgensi && (
                                 <span className={`absolute top-2 right-2 text-[10px] font-semibold px-2 py-0.5 rounded-md backdrop-blur-sm ${urgensiConfig[urgensi] ?? urgensiConfig.rendah}`}>
                                     {urgensi.charAt(0).toUpperCase() + urgensi.slice(1)}
@@ -120,7 +116,6 @@ export default function LaporanCard({ dataLaporan, token }) {
                             )}
                         </div>
 
-                        {/* ── Action bar (like, comment) ── */}
                         <div className="flex items-center px-3.5 pt-3 pb-1">
                             <div className="flex items-center gap-3">
                                 <LikeButton />

@@ -63,16 +63,10 @@ export default function Login() {
                         className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm outline-none focus:border-emerald-400 focus:bg-white transition-all"
                     />
 
-                    {error && (
-                        <p className="text-red-500 text-xs bg-red-50 border border-red-200 rounded-lg px-3 py-2">
-                            {error}
-                        </p>
-                    )}
-
                     <button
                         type="submit"
                         disabled={loading}
-                        className="mt-2 w-full py-3 bg-[#A2CB8B] text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition-all disabled:opacity-50"
+                        className="mt-2 w-full py-3 bg-[#A2CB8B] text-white text-sm font-semibold rounded-xl hover:bg-[#A2CB8B]/80 transition-all disabled:opacity-50"
                     >
                         {loading ? 'Memuat...' : 'Masuk'}
                     </button>

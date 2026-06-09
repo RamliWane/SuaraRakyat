@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { libraryNav, menuNav } from "../../../lib/navigationitems";
 import Link from "next/link"
+import { Logout } from "../../../lib/api/auth";
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react";
 
@@ -9,12 +10,10 @@ export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const pathname = usePathname();
-    const router = useRouter();
 
     async function handleLogout() {
-        await fetch("/api/logout", { method: "POST" });
-        router.push("/");
-    }
+        await Logout();
+}
 
     return (
         <>
@@ -66,7 +65,6 @@ export default function Sidebar() {
                         </div>
 
                         <div>
-
                             <ul className="flex flex-col gap-1">
                                 {menuNav.map((item) => (
                                     <Link href={item.href} key={item.label} onClick={() => setIsOpen(false)}>

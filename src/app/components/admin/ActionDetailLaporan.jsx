@@ -5,20 +5,6 @@ import { createFeedback } from "../../../lib/api/feedback";
 import { useRouter } from "next/navigation";
 import { updateStatusLaporan } from "../../../lib/api/laporan";
 
-const priorityConfig = {
-    Darurat: "bg-red-50 text-red-700 border-red-200 hover:bg-red-100",
-    Tinggi:  "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100",
-    Sedang:  "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100",
-    Rendah:  "bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100",
-};
-
-const priorityActive = {
-    Darurat: "bg-red-600 text-white border-red-600",
-    Tinggi:  "bg-amber-500 text-white border-amber-500",
-    Sedang:  "bg-blue-600 text-white border-blue-600",
-    Rendah:  "bg-gray-600 text-white border-gray-600",
-};
-
 const estimasi = [
     { label: "Verifikasi Admin", waktu: "± 1 hari", progress: 70 },
     { label: "Diteruskan ke Instansi", waktu: "± 3 hari", progress: 45 },
@@ -64,6 +50,11 @@ export default function ActionDetailLaporan({ reportId, token }) {
     const [loading, setLoading] = useState(false);
 
     async function handleSendFeedback() {
+        if (!note.trim()) {
+            alert("Catatan tidak boleh kosong!");
+            return;
+        }
+
         try {
             await createFeedback(
                 {
@@ -74,7 +65,7 @@ export default function ActionDetailLaporan({ reportId, token }) {
             );
 
             alert("Feedback berhasil dikirim!");
-            setNote(""); // reset biar clean
+            setNote("");
         } catch (err) {
             console.error(err);
             alert(err.message);

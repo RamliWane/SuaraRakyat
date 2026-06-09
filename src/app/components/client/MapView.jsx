@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
-// contoh import API lu
 import { getAllLaporan } from "../../../lib/api/laporan";
 
 export default function MapView() {

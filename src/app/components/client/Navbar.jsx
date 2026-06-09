@@ -165,7 +165,7 @@ const CardNav = ({
 
           <Link
             href="./client/auth/login"
-            className="bg-emerald-700 text-white p-3 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-transform duration-300 ease-out hover:-translate-y-2">
+            className="bg-[#A2CB8B] text-white p-3 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-transform duration-300 ease-out hover:-translate-y-2">
             Sign In
           </Link>
 

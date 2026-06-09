@@ -1,6 +1,6 @@
 'use client'
 
-import { api } from '../../../../lib/api/api';
+import { registerAction } from '../../../../lib/api/auth';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
@@ -23,29 +23,27 @@ export default function Register() {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
+        async function handleSubmit(e) {
+            e.preventDefault(); // WAJIB
 
-        if (form.password !== form.confirmPassword) {
-            setError('Password tidak cocok');
-            return;
-        }
+            setLoading(true);
+            setError('');
 
-        setLoading(true);
-        try {
-            await api.post('/auth/register', {
-                username: form.username,
-                email: form.email,
-                password: form.password
-            });
-            router.push('/client/auth/login')
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
+            if (form.password !== form.confirmPassword) {
+                setError("Password dan konfirmasi password tidak sama");
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const formData = new FormData(e.target); // ambil dari form
+                await registerAction(formData);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
         }
-    };
 
     return (
         <div
@@ -105,6 +103,7 @@ export default function Register() {
                         <input
                             type={showPassword ? "text" : "password"}
                             name="password"
+                            value={form.password}
                             onChange={handleChange}
                             placeholder="Password"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm outline-none focus:border-emerald-400 focus:bg-white"
@@ -114,6 +113,7 @@ export default function Register() {
                             type={showConfirmPassword ? "text" : "password"}
                             name="confirmPassword"
                             onChange={handleChange}
+                            value={form.confirmPassword}
                             placeholder="Konfirmasi Password"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm outline-none focus:border-emerald-400 focus:bg-white"
                         />
@@ -128,7 +128,7 @@ export default function Register() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="mt-2 w-full py-3 bg-[#A2CB8B] text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition-all disabled:opacity-50"
+                        className="mt-2 w-full py-3 bg-[#A2CB8B] text-white text-sm font-semibold rounded-xl hover:bg-[#A2CB8B] transition-all disabled:opacity-50"
                     >
                         {loading ? 'Loading...' : 'Daftar'}
                     </button>

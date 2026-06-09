@@ -166,7 +166,7 @@ export default function DashboardClient({ initialData }) {
           label:      'Selesai',
           value:      stats.selesai.toString(),
           badge:      stats.total > 0
-            ? `${((stats.selesai / stats.total) * 100).toFixed(1)}% resolusi`
+            ? `${((stats.selesai / stats.total) * 100).toFixed(1)}Selesai`
             : '0% resolusi',
           badgeColor: 'bg-[#EAF3DE] text-[#27500A]',
           valueColor: 'text-green-600',
